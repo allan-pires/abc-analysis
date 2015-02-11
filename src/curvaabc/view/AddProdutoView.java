@@ -29,12 +29,12 @@ public class AddProdutoView extends javax.swing.JFrame {
     }
     
     // Inicia variável de conexão com banco de dados
-    public void conectarBD( ) throws ClassNotFoundException {
+    private void conectarBD( ) throws ClassNotFoundException {
         db_con = ConexaoDB.getConexao();
     }
     
     // Adiciona o produto no banco de dados
-    public void adicionarProduto() throws SQLException, ClassNotFoundException{
+    private void adicionarProduto() throws SQLException, ClassNotFoundException{
         
         // Recebe os valores dos inputs e põe em variáveis
         String id = input_id.getText();
@@ -68,7 +68,7 @@ public class AddProdutoView extends javax.swing.JFrame {
     }
     
     // Reseta os campos de input
-    public void resetCampos(){
+    private void resetCampos(){
         input_id.setText("");
         input_preco.setText("");
         input_quantidade.setText("");
@@ -245,21 +245,7 @@ public class AddProdutoView extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(AddProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

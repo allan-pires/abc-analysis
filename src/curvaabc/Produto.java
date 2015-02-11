@@ -15,11 +15,11 @@ import java.util.ArrayList;
 
 public class Produto{
 
-    public Integer id;
+    private Integer id;
     
-    public Double preco;
+    private Double preco;
     
-    public Integer vendidos;
+    private Integer vendidos;
    
     private Integer criticidade;
     

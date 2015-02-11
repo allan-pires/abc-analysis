@@ -6,6 +6,7 @@
 package curvaabc;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -26,7 +27,8 @@ public class GraficoABC {
     
     public XYDataset createDataset() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         CurvaABC c = new CurvaABC();
-        c.sortByValorTotal(c.produtos);
+        ArrayList<Produto> produtos = c.getProdutos();
+        c.sortByValorTotal(produtos);
         
         // Cria as séries de linhas
         //Serie 1 = Linha todas as classes
@@ -41,13 +43,13 @@ public class GraficoABC {
         // Adiciona o ponto inicial
         all.add(0.0,0.0);
         
-        for (int i = 0; i < c.produtos.size(); i++){
-            Produto p = c.produtos.get(i);
+        for (int i = 0; i < produtos.size(); i++){
+            Produto p = produtos.get(i);
             
             // Define os valores de X e Y
             double x, y;
-            x = (double)(((double)i+1)/(double)c.produtos.size())*100.0;
-            y = c.porcentagem_acumulada.get(i)*100.0;
+            x = (double)(((double)i+1)/(double)produtos.size())*100.0;
+            y = c.getPorcentagem_acumulada().get(i)*100.0;
             
             // Pega a classe do produto
             String classe = c.getClasse(i);

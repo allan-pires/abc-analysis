@@ -30,7 +30,7 @@ public class ConfigurarClassificacaoView extends javax.swing.JFrame {
         getConfig();
     }
     
-    public void getConfig() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
+    private void getConfig() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
         try {
             // Pega os dados do banco de dados
             conectarBD();
@@ -60,7 +60,7 @@ public class ConfigurarClassificacaoView extends javax.swing.JFrame {
         db_con.close();
     }
     
-    public boolean checkConfig() throws ClassNotFoundException, InstantiationException, IllegalAccessException{
+    private boolean checkConfig() throws ClassNotFoundException, InstantiationException, IllegalAccessException{
             conectarBD();
             
             // Pega configurações modificadas
@@ -74,7 +74,7 @@ public class ConfigurarClassificacaoView extends javax.swing.JFrame {
             return (limite_ok && intersecao_ok);
     }
     
-    public void salvarConfig() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+    private void salvarConfig() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
             
             if (checkConfig()){
                 conectarBD();
@@ -101,7 +101,7 @@ public class ConfigurarClassificacaoView extends javax.swing.JFrame {
     }
     
     // Inicia variável de conexão com banco de dados
-    public void conectarBD() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    private void conectarBD() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         //String driver = "org.apache.derby.jdbc.ClientDriver";
         //Class.forName(driver).newInstance();
         db_con = ConexaoDB.getConexao();

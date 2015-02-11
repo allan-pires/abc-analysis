@@ -6,6 +6,7 @@
 package curvaabc.view;
 
 import curvaabc.CurvaABC;
+import curvaabc.Relatorio;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,7 +22,8 @@ public class RelatorioView extends javax.swing.JFrame {
     public RelatorioView() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         initComponents();
         CurvaABC curva = new CurvaABC();
-        label_relatorio.setText(curva.printRelatorio());
+        Relatorio r = new Relatorio();
+        label_relatorio.setText(r.print(curva));
     }
 
     /**
