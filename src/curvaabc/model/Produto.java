@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class Produto{
 
-    private Integer id;
+    private String id;
     
     private Double preco;
     
@@ -27,14 +27,14 @@ public class Produto{
     public Produto() {
     }
 
-    public Produto(Integer id, Double preco, Integer vendidos, Integer criticidade) {
+    public Produto(String id, Double preco, Integer vendidos, Integer criticidade) {
         this.id = id;
         this.preco = preco;
         this.vendidos = vendidos;
         this.criticidade = criticidade;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
@@ -43,8 +43,8 @@ public class Produto{
         return produtos;
     }
     
-    public void setId(Integer id) {
-        Integer oldId = this.id;
+    public void setId(String id) {
+        String oldId = this.id;
         this.id = id;
     }
 

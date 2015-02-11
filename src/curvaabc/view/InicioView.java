@@ -203,10 +203,14 @@ public class InicioView extends javax.swing.JFrame {
     }//GEN-LAST:event_button_relatorio1MouseClicked
 
     private void button_gerenciar_itensMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_gerenciar_itensMouseClicked
-            AddProdutoView t = null;
+            GerenciarProdutosView t = null;
         try {
-            t = new AddProdutoView();
+            t = new GerenciarProdutosView();
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
             Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
         }
             Window w = new Window(t);

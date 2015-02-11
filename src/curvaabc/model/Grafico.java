@@ -7,6 +7,7 @@ package curvaabc.model;
 
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -15,7 +16,7 @@ import org.jfree.data.xy.XYDataset;
  */
 public class Grafico {
     
-    private XYDataset dataset;
+    private CategoryDataset dataset;
     
     private JFreeChart chart;
     
@@ -29,7 +30,7 @@ public class Grafico {
         this.chartPanel = chartPanel;
     }
 
-    public Grafico(XYDataset dataset, JFreeChart chart) {
+    public Grafico(CategoryDataset dataset, JFreeChart chart) {
         this.dataset = dataset;
         this.chart = chart;
         this.chartPanel = new ChartPanel(chart);

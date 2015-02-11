@@ -6,6 +6,7 @@
 package curvaabc.view;
 
 import curvaabc.ConexaoDB;
+import curvaabc.model.Produto;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,11 +22,30 @@ public class AddProdutoView extends javax.swing.JFrame {
     
     //Conexão com o banco de dados
     Connection db_con;
+    int row = -1;
 
     // Construtor
     public AddProdutoView() throws ClassNotFoundException {
         initComponents();
         conectarBD();
+    }
+    
+    // Construtor
+    public AddProdutoView(int i) throws ClassNotFoundException {
+        initComponents();
+        conectarBD();
+        row = i;
+        
+        String id = (GerenciarProdutosView.tabelaGerenciar.getValueAt(row, 0)).toString();
+        String preco = (GerenciarProdutosView.tabelaGerenciar.getValueAt(row, 1)).toString();
+        String vendidos = (GerenciarProdutosView.tabelaGerenciar.getValueAt(row, 2)).toString();
+        int criticidade = Integer.parseInt((GerenciarProdutosView.tabelaGerenciar.getValueAt(row, 3)).toString());
+        
+        input_id.setText(id);
+        input_preco.setText(preco);
+        input_quantidade.setText(vendidos);
+        combo_criticidade.setSelectedIndex(criticidade-1);
+        
     }
     
     // Inicia variável de conexão com banco de dados
@@ -40,23 +60,17 @@ public class AddProdutoView extends javax.swing.JFrame {
         String id = input_id.getText();
         Double preco = Double.parseDouble(input_preco.getText());
         int quantidade = Integer.parseInt(input_quantidade.getText());
-        int criticidade = Integer.parseInt(combo_criticidade.getSelectedItem().toString());
+        Integer criticidade = Integer.parseInt(combo_criticidade.getSelectedItem().toString());
+        Produto p = new Produto(id, preco, quantidade, criticidade);
         
-        // Verifica corretude dos inputs
+       // Verifica corretude dos inputs
         if (quantidade > 0 && preco > 0){
-        
-            // Cria o comando SQL para inserir produto
-            String sql = "INSERT INTO PRODUTO (ID, PRECO, VENDIDOS, CRITICIDADE) VALUES "
-                 +"("+id+","+preco+","+quantidade+","+criticidade+")";
-        
-            // Roda o comando SQL e adiciona o produto
-            conectarBD();
-            Statement stmt = db_con.createStatement();
-            stmt.executeUpdate(sql);
             
-            //Feedback
-            System.out.println("Adicionado produto.");
-            JOptionPane.showMessageDialog(AddProdutoView.this, "Produto adicionado com sucesso!");
+            if (row > -1){
+                ConexaoDB.alterarProduto(AddProdutoView.this, p);
+                row = -1;
+            }
+            else ConexaoDB.adicionarProduto(AddProdutoView.this, p);
             
             // Resetar campos
             resetCampos();

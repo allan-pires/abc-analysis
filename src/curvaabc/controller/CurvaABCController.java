@@ -115,10 +115,10 @@ public class CurvaABCController {
                 while (list.next()) {
 
                     // Inicia variáveis de acordo o banco de dados
-                    int id = Integer.parseInt(list.getString(1));
+                    String id = list.getString(1);
                     Double preco = Double.parseDouble(list.getString(2));
                     int vendidos = Integer.parseInt(list.getString(3));
-                    int criticidade = Integer.parseInt(list.getString(4));
+                    Integer criticidade = Integer.parseInt(list.getString(4));
 
                     // Cria um novo produto com os dados do banco
                     Produto p = new Produto(id, preco, vendidos, criticidade);

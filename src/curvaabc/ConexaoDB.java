@@ -5,12 +5,15 @@
  */
 package curvaabc;
 
+import curvaabc.model.Produto;
+import java.awt.Component;
 import java.sql.Connection;
 import java.sql.DriverManager;  
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException; 
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -125,6 +128,52 @@ public class ConexaoDB {
             
             System.out.println("Criada tabela CLASSECONFIG");
         }
+    
+    // Adiciona o produto no banco de dados
+    public static void adicionarProduto(Component view, Produto p) throws SQLException, ClassNotFoundException{
+
+            // Cria o comando SQL para inserir produto
+            String sql = "INSERT INTO PRODUTO (ID, PRECO, VENDIDOS, CRITICIDADE) VALUES "
+                 +"("+p.getId()+","+p.getPreco()+","+p.getVendidos()+","+p.getCriticidade()+")";
+        
+            Statement stmt = getConexao().createStatement();
+            stmt.executeUpdate(sql);
+            
+            //Feedback
+            System.out.println("Adicionado produto.");
+            JOptionPane.showMessageDialog(view, "Produto adicionado com sucesso!");
+
+    }
+    
+    // Adiciona o produto no banco de dados
+    public static void alterarProduto(Component view, Produto p) throws SQLException, ClassNotFoundException{
+
+            // Cria o comando SQL para inserir produto
+            String sql = "UPDATE PRODUTO SET ID="+p.getId()+", PRECO="+p.getPreco()+", VENDIDOS="+p.getVendidos()+", CRITICIDADE="+p.getCriticidade()+" WHERE "
+                 +"ID="+p.getId();
+        
+            Statement stmt = getConexao().createStatement();
+            stmt.executeUpdate(sql);
+            
+            //Feedback
+            System.out.println("Produto alterado.");
+            JOptionPane.showMessageDialog(view, "Produto modificado com sucesso!");
+
+    }
+    
+    public static void removerProduto(Component view, Produto p)  throws SQLException, ClassNotFoundException{
+            
+            // Cria o comando SQL para inserir produto
+            String sql = "DELETE FROM PRODUTO WHERE "
+                 +"ID="+p.getId();
+        
+            Statement stmt = getConexao().createStatement();
+            stmt.executeUpdate(sql);
+            
+            //Feedback
+            System.out.println("Produto removido.");
+            JOptionPane.showMessageDialog(view, "Produto removido!");
+    }
     }
     
 
