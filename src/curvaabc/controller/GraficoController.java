@@ -55,7 +55,7 @@ public class GraficoController {
         this.grafico = new Grafico(dataset, chart);
     }
   
-    public CategoryDataset createDataset() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    private CategoryDataset createDataset() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         
         // row keys...
         final String series1 = "% Itens";

@@ -74,7 +74,7 @@ public class CurvaABCController {
     }
     
     // Atualizar configuração
-    public void atualizarConfiguração() {
+    private void atualizarConfiguração() {
         try {
             // Pega os dados do banco de dados
             Statement stmt = db_con.createStatement();
