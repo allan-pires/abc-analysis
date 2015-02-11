@@ -5,14 +5,14 @@
  */
 package curvaabc.controller;
 
-import model.CurvaABC;
+import curvaabc.model.CurvaABC;
 import java.awt.BasicStroke;
 import java.awt.Color;
-import model.Produto;
+import curvaabc.model.Produto;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Grafico;
+import curvaabc.model.Grafico;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;

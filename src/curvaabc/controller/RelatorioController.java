@@ -5,10 +5,10 @@
  */
 package curvaabc.controller;
 
-import model.CurvaABC;
+import curvaabc.model.CurvaABC;
 import static curvaabc.view.TabelaABCView.round;
-import model.Relatorio;
-import model.Produto;
+import curvaabc.model.Relatorio;
+import curvaabc.model.Produto;
 import java.util.ArrayList;
 
 /**

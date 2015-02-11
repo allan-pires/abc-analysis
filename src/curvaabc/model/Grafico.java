@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package curvaabc.model;
 
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -19,7 +19,7 @@ public class Grafico {
     
     private JFreeChart chart;
     
-    ChartPanel chartPanel;
+    private ChartPanel chartPanel;
 
     public ChartPanel getChartPanel() {
         return chartPanel;

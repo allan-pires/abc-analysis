@@ -5,7 +5,7 @@
  */
 package curvaabc.view;
 
-import model.CurvaABC;
+import curvaabc.model.CurvaABC;
 import curvaabc.controller.RelatorioController;
 import java.util.logging.Level;
 import java.util.logging.Logger;

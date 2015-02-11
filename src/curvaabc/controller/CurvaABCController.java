@@ -6,7 +6,7 @@
 package curvaabc.controller;
 
 import curvaabc.ConexaoDB;
-import model.CurvaABC;
+import curvaabc.model.CurvaABC;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Produto;
+import curvaabc.model.Produto;
 
 /**
  *

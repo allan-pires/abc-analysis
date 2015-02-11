@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package curvaabc.view;
-import model.CurvaABC;
+import curvaabc.model.CurvaABC;
 import curvaabc.controller.CurvaABCController;
-import model.Produto;
+import curvaabc.model.Produto;
 import curvaabc.controller.RelatorioController;
 import java.util.ArrayList;
 import java.util.logging.Level;

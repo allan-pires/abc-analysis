@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package curvaabc.model;
 
-import model.Produto;
+import curvaabc.model.Produto;
 import curvaabc.view.AddProdutoView;
 import curvaabc.view.InicioView;
 import java.sql.Connection;
