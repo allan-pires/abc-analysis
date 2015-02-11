@@ -3,19 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package curvaabc;
+package curvaabc.controller;
 
-import static curvaabc.CurvaABC.round;
+import model.CurvaABC;
+import static curvaabc.view.TabelaABCView.round;
+import model.Relatorio;
+import model.Produto;
 import java.util.ArrayList;
 
 /**
  *
  * @author allan
  */
-public class Relatorio {
+public class RelatorioController {
+    
+    Relatorio relatorio = new Relatorio();
     
     // Cria o relatório
-    public String print(CurvaABC curva){
+    public String print(){
+        CurvaABCController c_controller = new CurvaABCController();
+        CurvaABC curva = c_controller.getCurva();
         
         // Atualiza porcentagem
         double porcentagemA = (curva.getClasseA_porcentagem());
@@ -30,7 +37,7 @@ public class Relatorio {
         
         // Atualiza lista de classes
         for (int i = 0; i < produtos.size(); i++){
-            String classe = curva.getClasse(i);
+            String classe = c_controller.getClasse(i);
             switch(classe){
                 case "A": a.add(produtos.get(i)); break;
                 case "B": b.add(produtos.get(i)); break;
@@ -39,7 +46,7 @@ public class Relatorio {
         }
         
         // Título de seções do relatório
-        String relatorio = "<html>";
+        String relatorio_completo = "<html>";
         String relatorio_A = "<b>Classe A - Até "+porcentagemA+"% do valor monetário total acumulado de consumo</b><br>\n";
         String relatorio_B = "<b>Classe B - Entre "+(porcentagemA+1.0)+" e "+(porcentagemA+porcentagemB)+"% do valor monetário total acumulado de consumo</b><br>\n";
         String relatorio_C = "<b>Classe C - Entre "+((porcentagemA+porcentagemB)+1.0)+" e "+(porcentagemA+porcentagemB+porcentagemC)+"% do valor monetário total acumulado de consumo</b><br>\n";
@@ -123,8 +130,10 @@ public class Relatorio {
         double pc = round(pc_acumulado-pa-pb, 2);
         relatorio_C += " - Análise: <b>"+porcentagem_itensC+"%</b> dos itens representam <b>"+pc+"%</b> do valor monetário total acumulado movimentado pelo estoque ("+pc_acumulado+"% - "+round(pa+pb,2)+"% marcação classificação B) -> <b>Classificação C</b><br><br>\n\n";
         
-        relatorio += relatorio_A + relatorio_B + relatorio_C;
-        relatorio += "</html>";
-        return relatorio;
+        relatorio_completo += relatorio_A + relatorio_B + relatorio_C;
+        relatorio_completo += "</html>";
+        
+        this.relatorio.setTexto(relatorio_completo);
+        return relatorio_completo;
     }
 }

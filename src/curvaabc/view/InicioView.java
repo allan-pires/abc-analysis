@@ -222,9 +222,9 @@ public class InicioView extends javax.swing.JFrame {
     }//GEN-LAST:event_button_relatorio1MousePressed
 
     private void button_graficoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_graficoMouseClicked
-        GraficoABCView v = null;
+        GraficoView v = null;
         try {
-            v = new GraficoABCView();
+            v = new GraficoView();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {

@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 package curvaabc.view;
-import curvaabc.CurvaABC;
-import curvaabc.Produto;
-import curvaabc.Relatorio;
+import model.CurvaABC;
+import curvaabc.controller.CurvaABCController;
+import model.Produto;
+import curvaabc.controller.RelatorioController;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,10 +28,8 @@ public class TabelaABCView extends javax.swing.JFrame {
     public TabelaABCView() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         initComponents();
         
-        CurvaABC curva = new CurvaABC();
-        
         // Preenche a tabela
-        preencherTabela(curva);
+        preencherTabela();
         
     }
     
@@ -46,7 +45,9 @@ public class TabelaABCView extends javax.swing.JFrame {
 
     
     //Preenche a tabela de acordo com um arraylist
-    private void preencherTabela(CurvaABC curva){
+    private void preencherTabela(){
+        CurvaABCController c_controller = new CurvaABCController();
+        CurvaABC curva = c_controller.getCurva();
         
         // Cria o modelo da tabela e define como ordenável
         DefaultTableModel model = (DefaultTableModel) tabelaABC.getModel();
@@ -65,6 +66,8 @@ public class TabelaABCView extends javax.swing.JFrame {
         
         for (int i = 0; i < produtos.size(); i++){
             
+            
+            
             // Instancia o produto da vez
             Produto p = produtos.get(i);
             
@@ -78,7 +81,7 @@ public class TabelaABCView extends javax.swing.JFrame {
             porcentagem_acumulada = (curva.getPorcentagem_acumulada().get(i) * 100.0);
             
             // Classe
-            String classe = curva.getClasse(i);
+            String classe = c_controller.getClasse(i);
             
             // Porcentagem acumulada ABC
             double porcentagem_abc = ((double) ordem/ (double)produtos.size())*100.0;
@@ -91,8 +94,8 @@ public class TabelaABCView extends javax.swing.JFrame {
         }
         
         
-        Relatorio r = new Relatorio();
-        System.out.println(r.print(curva));
+        RelatorioController r = new RelatorioController();
+        System.out.println(r.print());
     }
 
     /**

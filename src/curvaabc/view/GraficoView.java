@@ -6,7 +6,7 @@
 package curvaabc.view;
 
 
-import curvaabc.GraficoABC;
+import curvaabc.controller.GraficoController;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.util.logging.Level;
@@ -31,89 +31,18 @@ import org.jfree.chart.renderer.xy.XYAreaRenderer;
  *
  * @author doisl_000
  */
-public class GraficoABCView extends javax.swing.JFrame {
+public class GraficoView extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 1L;
 
-    public GraficoABCView() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public GraficoView() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 
-        final XYDataset dataset = createDataset();
-        final JFreeChart chart = createChart(dataset);
-        final ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-        setContentPane(chartPanel);
+        GraficoController g = new GraficoController();
+        ChartPanel c= g.getGrafico().getChartPanel();
+        setContentPane(c);
 
     }
-    
-    private XYDataset createDataset() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        GraficoABC g = new GraficoABC();
-        return g.createDataset();
-    }
-    
-    /**
-     * Creates a chart.
-     * 
-     * @param dataset  the data for the chart.
-     * 
-     * @return a chart.
-     */
-    private JFreeChart createChart(final XYDataset dataset) {
-        
-        // create the chart...
-        final JFreeChart chart = ChartFactory.createXYLineChart(
-            "Gráfico de Produtos por Classe",      // chart title
-            "% Produtos",                      // x axis label
-            "% Valor",                      // y axis label
-            dataset,                  // data
-            PlotOrientation.VERTICAL,
-            true,                     // include legend
-            true,                     // tooltips
-            false                     // urls
-        );
-
-        // NOW DO SOME OPTIONAL CUSTOMISATION OF THE CHART...
-        chart.setBackgroundPaint(Color.white);
-        
-        // get a reference to the plot for further customisation...
-        final XYPlot plot = chart.getXYPlot();
-        plot.setBackgroundPaint(Color.white);
-        
-        // plot.setAxisOffset(new Spacer(Spacer.ABSOLUTE, 5.0, 5.0, 5.0, 5.0));
-        plot.setDomainGridlinePaint(Color.gray);
-        plot.setRangeGridlinePaint(Color.gray);
-        
-        //Serie 1 = Linha todas as classes
-        //Serie 2 = Linha classe A
-        //Serie 3 = Linha classe B
-        //Serie 4 = Linha classe C
-        
-        // Mostra linha de todas as classes
-        final XYSplineRenderer renderer = new XYSplineRenderer();
-        renderer.setSeriesLinesVisible(0, true);
-        renderer.setSeriesVisibleInLegend(0, false);
-        renderer.setSeriesPaint(0, Color.black);
-        renderer.setSeriesPaint(3, Color.MAGENTA);
-        
-        // Não mostra as linhas de classes A,B e C
-        renderer.setSeriesLinesVisible(1, false);
-        renderer.setSeriesLinesVisible(2, false);
-        renderer.setSeriesLinesVisible(3, false);
-        
-        // Não mostra os símbolos de Serie 1
-        renderer.setSeriesShapesVisible(0, false);
-        renderer.setStroke(new BasicStroke(1.0f));
-
- 
-        plot.setRenderer(renderer);
-
-        // change the auto tick unit selection to integer units only...
-        final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
-        rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-        // OPTIONAL CUSTOMISATION COMPLETED.
-                
-        return chart;
-    }
-        
+   
  
     
     /**
@@ -173,7 +102,7 @@ public class GraficoABCView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        GraficoABCView.this.dispose();
+        GraficoView.this.dispose();
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**
@@ -193,28 +122,29 @@ public class GraficoABCView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GraficoABCView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GraficoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GraficoABCView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GraficoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GraficoABCView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GraficoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GraficoABCView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GraficoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                GraficoABCView demo = null;
+                GraficoView demo = null;
                 try {
-                    demo = new GraficoABCView();
+                    demo = new GraficoView();
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(GraficoABCView.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GraficoView.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (InstantiationException ex) {
-                    Logger.getLogger(GraficoABCView.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GraficoView.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IllegalAccessException ex) {
-                    Logger.getLogger(GraficoABCView.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GraficoView.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 demo.pack();
                 demo.setVisible(true);
