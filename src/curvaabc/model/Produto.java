@@ -23,6 +23,12 @@ public class Produto{
    
     private Integer criticidade;
     
+    private Double valor_acumulado;
+    
+    private Double porcentagem_acumulada;
+    
+    private String classe;
+    
     
     public Produto() {
     }
@@ -81,7 +87,7 @@ public class Produto{
     }
     
     public String getClasse(){
-        return "A";
+        return classe;
     }
 
     @Override
@@ -108,6 +114,26 @@ public class Produto{
     @Override
     public String toString() {
         return "Produto[ id=" + id + " ; preço="+preco+"; vendidos="+vendidos+"; criticidade="+criticidade+"]\n";
+    }
+
+    public Double getValor_acumulado() {
+        return valor_acumulado;
+    }
+
+    public void setValor_acumulado(Double valor_acumulado) {
+        this.valor_acumulado = valor_acumulado;
+    }
+
+    public Double getPorcentagem_acumulada() {
+        return porcentagem_acumulada;
+    }
+
+    public void setPorcentagem_acumulada(Double porcentagem_acumulada) {
+        this.porcentagem_acumulada = porcentagem_acumulada;
+    }
+
+    public void setClasse(String classe) {
+        this.classe = classe;
     }
 
     

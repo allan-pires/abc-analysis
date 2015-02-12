@@ -68,11 +68,12 @@ public class GraficoController {
         // Atualiza lista de classes
         ArrayList<Produto> produtos = c_controller.getCurva().getProdutos();
         for (int i = 0; i < produtos.size(); i++){
-            String classe = c_controller.getClasse(i);
+            Produto p = produtos.get(i);
+            String classe = p.getClasse();
             switch(classe){
-                case "A": a.add(produtos.get(i)); break;
-                case "B": b.add(produtos.get(i)); break;
-                case "C": c.add(produtos.get(i)); break;
+                case "A": a.add(p); break;
+                case "B": b.add(p); break;
+                case "C": c.add(p); break;
             }
         }
 
@@ -98,7 +99,7 @@ public class GraficoController {
         double pa = 0.0;
         if (a.size() > 0){
             size = a.size()-1;
-            pa = (c_controller.getCurva().getPorcentagem_acumulada().get(size)*100);
+            pa = (a.get(size).getPorcentagem_acumulada()*100);
         }
         double porcentagem_acumuladaA = round(pa, 2);
         dataset.addValue(porcentagem_acumuladaA, series2, classeA);
@@ -106,12 +107,12 @@ public class GraficoController {
         //Calcula porcentagem Acumulada de B
         double pb_acumulado = 0.0;
         if (a.size() > 0 && b.size() > 0){
-            size += b.size();
-            pb_acumulado = round(((c_controller.getCurva().getPorcentagem_acumulada().get(size))*100),2);
+            size = b.size()-1;
+            pb_acumulado = round((b.get(size).getPorcentagem_acumulada()*100),2);
         }
         else if (b.size() > 0){
-            size += b.size()-1;
-            pb_acumulado = round(((c_controller.getCurva().getPorcentagem_acumulada().get(size))*100),2);
+            size = b.size()-1;
+            pb_acumulado = round((b.get(size).getPorcentagem_acumulada()*100),2);
         }
         
         //Calcula porcentagem Acumulada de C
@@ -120,12 +121,12 @@ public class GraficoController {
         
         double pc_acumulado = 0.0;
         if (b.size() > 0 && c.size() > 0){
-            size += c.size();
-            pc_acumulado = round(((c_controller.getCurva().getPorcentagem_acumulada().get(size))*100),2);
+            size = c.size()-1;
+            pc_acumulado = round((c.get(size).getPorcentagem_acumulada()*100),2);
         }
         else if (c.size() > 0){
-            size += c.size()-1;
-            pc_acumulado = round(((c_controller.getCurva().getPorcentagem_acumulada().get(size))*100),2);
+            size = c.size()-1;
+            pc_acumulado = round((c.get(size).getPorcentagem_acumulada()*100),2);
         }
         
         double pc = round(pc_acumulado-pa-pb, 2);

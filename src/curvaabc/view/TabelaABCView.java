@@ -48,8 +48,7 @@ public class TabelaABCView extends javax.swing.JFrame {
     //Preenche a tabela de acordo com um arraylist
     private void preencherTabela() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         CurvaABCController c_controller = new CurvaABCController();
-        CurvaABC curva = c_controller.getCurva();
-        
+
         // Cria o modelo da tabela e define como ordenável
         DefaultTableModel model = (DefaultTableModel) tabelaABC.getModel();
         tabelaABC.setAutoCreateRowSorter(true);
@@ -59,15 +58,21 @@ public class TabelaABCView extends javax.swing.JFrame {
         rightRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         for (int i = 0; i < 9; i++) tabelaABC.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
         
-        // Inicializa a lista de produtos
-        ArrayList<Produto> produtos = curva.getProdutos();
+       inserirProdutosTabela(c_controller, model);
+        
+        RelatorioController r = new RelatorioController();
+        System.out.println(r.print());
+    }
+    
+    private void inserirProdutosTabela(CurvaABCController c_controller, DefaultTableModel model ){
+        
+         // Inicializa a lista de produtos
+        ArrayList<Produto> produtos = c_controller.getCurva().getProdutos();
         
         // Inicializa os valores de ordem ABC
         int ordem = 1;
         
         for (int i = 0; i < produtos.size(); i++){
-            
-            
             
             // Instancia o produto da vez
             Produto p = produtos.get(i);
@@ -75,17 +80,17 @@ public class TabelaABCView extends javax.swing.JFrame {
             // Calcula valores restantes da tabela:
             // Valor total e acumulado
             double valor = p.getValorTotal();
-            double valor_acumulado = (curva.getValor_acumulado().get(i));
+            double valor_acumulado = p.getValor_acumulado();
             
             // Porcentagem acumulada
             double porcentagem_acumulada;
-            porcentagem_acumulada = (curva.getPorcentagem_acumulada().get(i) * 100.0);
+            porcentagem_acumulada = p.getPorcentagem_acumulada()*100.0;
             
             // Classe
-            String classe = c_controller.getClasse(i);
+            String classe = c_controller.getClasse(p);
             
             // Porcentagem acumulada ABC
-            double porcentagem_abc = ((double) ordem/ (double)produtos.size())*100.0;
+            double porcentagem_abc = ((double)ordem/ (double)produtos.size())*100.0;
             
             // Insere na tabela
             model.insertRow(tabelaABC.getRowCount(), new Object[] {p.getId(), p.getPreco(), p.getVendidos(), round(valor, 2), round(valor_acumulado,2), String.valueOf(round(porcentagem_acumulada,2))+"%", classe, ordem, String.valueOf(round(porcentagem_abc,2))+"%"});
@@ -94,9 +99,6 @@ public class TabelaABCView extends javax.swing.JFrame {
             ordem++;
         }
         
-        
-        RelatorioController r = new RelatorioController();
-        System.out.println(r.print());
     }
 
     /**

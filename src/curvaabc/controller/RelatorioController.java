@@ -38,7 +38,7 @@ public class RelatorioController {
         
         // Atualiza lista de classes
         for (int i = 0; i < produtos.size(); i++){
-            String classe = c_controller.getClasse(i);
+            String classe = produtos.get(i).getClasse();
             switch(classe){
                 case "A": a.add(produtos.get(i)); break;
                 case "B": b.add(produtos.get(i)); break;
@@ -62,7 +62,7 @@ public class RelatorioController {
         }
         else relatorio_A += "Nenhum item";
         double porcentagem_itensAcumulado = 0.0;
-        double porcentagem_itensA = (((double) a.size()/(double)produtos.size())*100.0);
+        double porcentagem_itensA = (((double)a.size()/(double)produtos.size())*100.0);
         relatorio_A += " = "+ porcentagem_itensA + "% dos itens<br>\n";
         porcentagem_itensAcumulado += porcentagem_itensA;
         
@@ -75,7 +75,7 @@ public class RelatorioController {
             relatorio_B += (b.get(b.size()-1).getId());
         }
         else relatorio_B += "Nenhum item";
-        double porcentagem_itensB = (((double) b.size()/(double)produtos.size())*100.0);
+        double porcentagem_itensB = (((double)b.size()/(double)produtos.size())*100.0);
         porcentagem_itensAcumulado += porcentagem_itensB;
         relatorio_B += " = "+ porcentagem_itensB + "% dos itens ("+porcentagem_itensAcumulado+"% - "+porcentagem_itensA+"% Classificação A)<br>\n";
         
@@ -88,17 +88,17 @@ public class RelatorioController {
             relatorio_C += (c.get(c.size()-1).getId());
         }
         else relatorio_A += "Nenhum item";
-        double porcentagem_itensC = (((double) c.size()/(double)produtos.size())*100.0);
+        double porcentagem_itensC = (((double)c.size()/(double)produtos.size())*100.0);
         porcentagem_itensAcumulado += porcentagem_itensC;
         relatorio_C += " = "+ porcentagem_itensC + "% dos itens ("+porcentagem_itensAcumulado+"% - "+(porcentagem_itensB+porcentagem_itensA)+"% Classificação B)<br>\n";
         
-        ArrayList<Double> porcentagem_acumulada = curva.getPorcentagem_acumulada();
+        /*ArrayList<Double> porcentagem_acumulada = curva.getPorcentagem_acumulada();*/
         // Relatório de análise classe A
         int size = 0;
         double pa = 0.0;
         if (a.size() > 0){
             size = a.size()-1;
-            pa = (porcentagem_acumulada.get(size)*100);
+            pa = (a.get(size).getPorcentagem_acumulada()*100);
         }
         double porcentagem_acumuladaA = round(pa, 2);
         relatorio_A += " - Análise: <b>"+porcentagem_itensA+"%</b> dos itens representam <b>"+porcentagem_acumuladaA+"%</b> do valor monetário total acumulado movimentado pelo estoque -> <b>Classificação A</b><br><br>\n\n";
@@ -106,12 +106,12 @@ public class RelatorioController {
         // Relatório de análise classe B
         double pb_acumulado = 0.0;
         if (a.size() > 0 && b.size() > 0){
-            size += b.size();
-            pb_acumulado = round(((porcentagem_acumulada.get(size))*100),2);
+            size = b.size()-1;
+            pb_acumulado = round(((b.get(size).getPorcentagem_acumulada())*100),2);
         }
         else if (b.size() > 0){
-            size += b.size()-1;
-            pb_acumulado = round(((porcentagem_acumulada.get(size))*100),2);
+            size = b.size()-1;
+            pb_acumulado = round((b.get(size).getPorcentagem_acumulada()*100),2);
         }
         
         double pb = round(pb_acumulado-pa, 2);
@@ -120,12 +120,12 @@ public class RelatorioController {
         // Relatório de análise classe C
         double pc_acumulado = 0.0;
         if (b.size() > 0 && c.size() > 0){
-            size += c.size();
-            pc_acumulado = round(((porcentagem_acumulada.get(size))*100),2);
+            size = c.size()-1;
+            pc_acumulado = round((c.get(size).getPorcentagem_acumulada()*100),2);
         }
         else if (c.size() > 0){
-            size += c.size()-1;
-            pc_acumulado = round(((porcentagem_acumulada.get(size))*100),2);
+            size = c.size()-1;
+            pc_acumulado = round((c.get(size).getPorcentagem_acumulada()*100),2);
         }
         
         double pc = round(pc_acumulado-pa-pb, 2);

@@ -35,19 +35,20 @@ public class InicioView extends javax.swing.JFrame {
     private void initComponents() {
 
         button_gerenciar_itens = new javax.swing.JButton();
-        button_relatorio1 = new javax.swing.JButton();
+        button_analiseABC = new javax.swing.JButton();
         button_grafico = new javax.swing.JButton();
         button_sair = new javax.swing.JButton();
         icon = new javax.swing.JLabel();
         button_configuracoes = new javax.swing.JButton();
-        button_relatorio2 = new javax.swing.JButton();
+        button_relatorio = new javax.swing.JButton();
+        button_analiseABCCriticidade = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         button_gerenciar_itens.setBackground(new java.awt.Color(241, 241, 241));
         button_gerenciar_itens.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         button_gerenciar_itens.setText("Gerenciar itens");
-        button_gerenciar_itens.setBorder(button_relatorio1.getBorder());
+        button_gerenciar_itens.setBorder(button_analiseABC.getBorder());
         button_gerenciar_itens.setPreferredSize(new java.awt.Dimension(193, 23));
         button_gerenciar_itens.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -60,30 +61,30 @@ public class InicioView extends javax.swing.JFrame {
             }
         });
 
-        button_relatorio1.setBackground(new java.awt.Color(241, 241, 241));
-        button_relatorio1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        button_relatorio1.setText("Exibir planilha sem criticidade");
-        button_relatorio1.setMaximumSize(new java.awt.Dimension(113, 23));
-        button_relatorio1.setMinimumSize(new java.awt.Dimension(113, 23));
-        button_relatorio1.setPreferredSize(new java.awt.Dimension(193, 23));
-        button_relatorio1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                button_relatorio1MouseClicked(evt);
-            }
+        button_analiseABC.setBackground(new java.awt.Color(241, 241, 241));
+        button_analiseABC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        button_analiseABC.setText("Análise ABC");
+        button_analiseABC.setMaximumSize(new java.awt.Dimension(113, 23));
+        button_analiseABC.setMinimumSize(new java.awt.Dimension(113, 23));
+        button_analiseABC.setPreferredSize(new java.awt.Dimension(193, 23));
+        button_analiseABC.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                button_relatorio1MousePressed(evt);
+                button_analiseABCMousePressed(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                button_analiseABCMouseClicked(evt);
             }
         });
-        button_relatorio1.addActionListener(new java.awt.event.ActionListener() {
+        button_analiseABC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_relatorio1ActionPerformed(evt);
+                button_analiseABCActionPerformed(evt);
             }
         });
 
         button_grafico.setBackground(new java.awt.Color(241, 241, 241));
         button_grafico.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        button_grafico.setText("Exibir gráfico");
-        button_grafico.setBorder(button_relatorio1.getBorder());
+        button_grafico.setText("Gráfico");
+        button_grafico.setBorder(button_analiseABC.getBorder());
         button_grafico.setMaximumSize(new java.awt.Dimension(113, 23));
         button_grafico.setMinimumSize(new java.awt.Dimension(113, 23));
         button_grafico.setPreferredSize(new java.awt.Dimension(203, 34));
@@ -101,7 +102,7 @@ public class InicioView extends javax.swing.JFrame {
         button_sair.setBackground(new java.awt.Color(241, 241, 241));
         button_sair.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         button_sair.setText("Sair");
-        button_sair.setBorder(button_relatorio1.getBorder());
+        button_sair.setBorder(button_analiseABC.getBorder());
         button_sair.setMaximumSize(new java.awt.Dimension(113, 23));
         button_sair.setPreferredSize(new java.awt.Dimension(61, 34));
         button_sair.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -114,8 +115,8 @@ public class InicioView extends javax.swing.JFrame {
 
         button_configuracoes.setBackground(new java.awt.Color(241, 241, 241));
         button_configuracoes.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        button_configuracoes.setText("Configurações de classificação");
-        button_configuracoes.setBorder(button_relatorio1.getBorder());
+        button_configuracoes.setText("Configurações");
+        button_configuracoes.setBorder(button_analiseABC.getBorder());
         button_configuracoes.setMaximumSize(new java.awt.Dimension(113, 23));
         button_configuracoes.setMinimumSize(new java.awt.Dimension(113, 23));
         button_configuracoes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -129,23 +130,43 @@ public class InicioView extends javax.swing.JFrame {
             }
         });
 
-        button_relatorio2.setBackground(new java.awt.Color(241, 241, 241));
-        button_relatorio2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        button_relatorio2.setText("Exibir relatório");
-        button_relatorio2.setMaximumSize(new java.awt.Dimension(113, 23));
-        button_relatorio2.setMinimumSize(new java.awt.Dimension(113, 23));
-        button_relatorio2.setPreferredSize(new java.awt.Dimension(193, 23));
-        button_relatorio2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                button_relatorio2MouseClicked(evt);
-            }
+        button_relatorio.setBackground(new java.awt.Color(241, 241, 241));
+        button_relatorio.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        button_relatorio.setText("Relatório");
+        button_relatorio.setMaximumSize(new java.awt.Dimension(113, 23));
+        button_relatorio.setMinimumSize(new java.awt.Dimension(113, 23));
+        button_relatorio.setPreferredSize(new java.awt.Dimension(193, 23));
+        button_relatorio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                button_relatorio2MousePressed(evt);
+                button_relatorioMousePressed(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                button_relatorioMouseClicked(evt);
             }
         });
-        button_relatorio2.addActionListener(new java.awt.event.ActionListener() {
+        button_relatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_relatorio2ActionPerformed(evt);
+                button_relatorioActionPerformed(evt);
+            }
+        });
+
+        button_analiseABCCriticidade.setBackground(new java.awt.Color(241, 241, 241));
+        button_analiseABCCriticidade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        button_analiseABCCriticidade.setText("Análise ABC + Criticidade");
+        button_analiseABCCriticidade.setMaximumSize(new java.awt.Dimension(113, 23));
+        button_analiseABCCriticidade.setMinimumSize(new java.awt.Dimension(113, 23));
+        button_analiseABCCriticidade.setPreferredSize(new java.awt.Dimension(193, 23));
+        button_analiseABCCriticidade.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                button_analiseABCCriticidadeMousePressed(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                button_analiseABCCriticidadeMouseClicked(evt);
+            }
+        });
+        button_analiseABCCriticidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_analiseABCCriticidadeActionPerformed(evt);
             }
         });
 
@@ -156,15 +177,19 @@ public class InicioView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(button_relatorio2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button_configuracoes, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(icon)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(button_relatorio1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(button_gerenciar_itens, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(button_grafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(button_sair, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(button_relatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(button_configuracoes, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(icon)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(button_analiseABC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(button_gerenciar_itens, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(button_grafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(button_sair, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(button_analiseABCCriticidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,14 +201,16 @@ public class InicioView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button_configuracoes, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(button_relatorio1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(button_analiseABC, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(button_relatorio2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(button_analiseABCCriticidade, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(button_relatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button_grafico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button_sair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -197,7 +224,7 @@ public class InicioView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_button_graficoActionPerformed
 
-    private void button_relatorio1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_relatorio1MouseClicked
+    private void button_analiseABCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_analiseABCMouseClicked
 
         try {
             
@@ -214,7 +241,7 @@ public class InicioView extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_button_relatorio1MouseClicked
+    }//GEN-LAST:event_button_analiseABCMouseClicked
 
     private void button_gerenciar_itensMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_gerenciar_itensMouseClicked
             GerenciarProdutosView t = null;
@@ -233,13 +260,13 @@ public class InicioView extends javax.swing.JFrame {
             t.setVisible(true);
     }//GEN-LAST:event_button_gerenciar_itensMouseClicked
 
-    private void button_relatorio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_relatorio1ActionPerformed
+    private void button_analiseABCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_analiseABCActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_button_relatorio1ActionPerformed
+    }//GEN-LAST:event_button_analiseABCActionPerformed
 
-    private void button_relatorio1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_relatorio1MousePressed
+    private void button_analiseABCMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_analiseABCMousePressed
 
-    }//GEN-LAST:event_button_relatorio1MousePressed
+    }//GEN-LAST:event_button_analiseABCMousePressed
 
     private void button_graficoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_graficoMouseClicked
         GraficoView v = null;
@@ -278,7 +305,7 @@ public class InicioView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_button_configuracoesActionPerformed
 
-    private void button_relatorio2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_relatorio2MouseClicked
+    private void button_relatorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_relatorioMouseClicked
         RelatorioView v = null;
         try {
             v = new RelatorioView();
@@ -293,19 +320,35 @@ public class InicioView extends javax.swing.JFrame {
         }
         v.setSize(800, 400);
         v.show();
-    }//GEN-LAST:event_button_relatorio2MouseClicked
+    }//GEN-LAST:event_button_relatorioMouseClicked
 
-    private void button_relatorio2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_relatorio2MousePressed
+    private void button_relatorioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_relatorioMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_button_relatorio2MousePressed
+    }//GEN-LAST:event_button_relatorioMousePressed
 
-    private void button_relatorio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_relatorio2ActionPerformed
+    private void button_relatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_relatorioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_button_relatorio2ActionPerformed
+    }//GEN-LAST:event_button_relatorioActionPerformed
 
     private void button_sairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_sairMouseClicked
         InicioView.this.dispose();
     }//GEN-LAST:event_button_sairMouseClicked
+
+    private void button_analiseABCCriticidadeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_analiseABCCriticidadeMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button_analiseABCCriticidadeMousePressed
+
+    private void button_analiseABCCriticidadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_analiseABCCriticidadeMouseClicked
+ 
+            TabelaABCCriticidadeView t = new TabelaABCCriticidadeView();
+            Window w = new Window(t);
+            t.setVisible(true);
+
+    }//GEN-LAST:event_button_analiseABCCriticidadeMouseClicked
+
+    private void button_analiseABCCriticidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_analiseABCCriticidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button_analiseABCCriticidadeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -343,11 +386,12 @@ public class InicioView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_analiseABC;
+    private javax.swing.JButton button_analiseABCCriticidade;
     private javax.swing.JButton button_configuracoes;
     private javax.swing.JButton button_gerenciar_itens;
     private javax.swing.JButton button_grafico;
-    private javax.swing.JButton button_relatorio1;
-    private javax.swing.JButton button_relatorio2;
+    private javax.swing.JButton button_relatorio;
     private javax.swing.JButton button_sair;
     private javax.swing.JLabel icon;
     // End of variables declaration//GEN-END:variables

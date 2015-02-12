@@ -5,16 +5,8 @@
  */
 package curvaabc.model;
 
-import curvaabc.model.Produto;
-import curvaabc.view.AddProdutoView;
 import curvaabc.view.InicioView;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
  *
@@ -36,9 +28,10 @@ public final class CurvaABC {
     // Valor total de produtos vendidos
     private double valor_total;
     
+    /*
     // Quantidade total de produtos vendidos
     private double quantidade_total;
-
+    
     // Valor acumulado de cada produto
     private ArrayList<Double> valor_acumulado;
     
@@ -47,11 +40,11 @@ public final class CurvaABC {
     
     // Quantidade de produto acumulado
     private ArrayList<Double> quantidade_acumulada;
-
+    */
+    
     // Lista de produtos
     private ArrayList<Produto> produtos;
 
-    
 
     //Construtor sem parâmetros
     public CurvaABC() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -65,9 +58,11 @@ public final class CurvaABC {
         this.valor_total = 0;
 
         produtos = new ArrayList<>();
+        /*
         valor_acumulado = new ArrayList<>();
         porcentagem_acumulada = new ArrayList<>();
         quantidade_acumulada = new ArrayList<>();
+                */
 
     }
 
@@ -83,9 +78,11 @@ public final class CurvaABC {
         this.valor_total = 0;
         
         produtos = new ArrayList<>();
+        /*
         valor_acumulado = new ArrayList<>();
         porcentagem_acumulada = new ArrayList<>();
         quantidade_acumulada = new ArrayList<>();
+                */
     }
 
     public double getClasseA_porcentagem() {
@@ -119,7 +116,7 @@ public final class CurvaABC {
     public void setValor_total(double valor_total) {
         this.valor_total = valor_total;
     }
-
+    /*
     public double getQuantidade_total() {
         return quantidade_total;
     }
@@ -155,6 +152,7 @@ public final class CurvaABC {
     public void addQuantidade_acumulada(Double v) {
         this.quantidade_acumulada.add(v);
     }
+    */
 
     public ArrayList<Produto> getProdutos() {
         return produtos;
@@ -168,10 +166,11 @@ public final class CurvaABC {
     public double getPorcentagemValor(Produto produto) {
         return produto.getValorTotal() / valor_total;
     }
-
+    
+    /*
     // Retorna a porcentagem do produto em relação ao total de produtos vendidos
     public double getPorcentagemQuantidade(Produto produto) {
-        return ((double) produto.getVendidos()) / quantidade_total;
+        return produto.getVendidos() / quantidade_total;
     }
     
     
@@ -182,7 +181,7 @@ public final class CurvaABC {
     public void addValor_acumulado(double v) {
         this.valor_acumulado.add(v);
     }
-
+    */
     
 
     public static void main(String[] args) {
