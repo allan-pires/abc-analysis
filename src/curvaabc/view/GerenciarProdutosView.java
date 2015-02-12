@@ -5,9 +5,8 @@
  */
 package curvaabc.view;
 
-import curvaabc.controller.CurvaABCController;
 import curvaabc.ConexaoDB;
-import curvaabc.model.CurvaABC;
+import curvaabc.controller.ProdutoController;
 import curvaabc.model.Produto;
 import java.awt.Window;
 import java.sql.SQLException;
@@ -22,15 +21,17 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author allan
  */
-public class GerenciarProdutosView extends javax.swing.JFrame{
-        /**
-     * Creates new form GerenciarItensView
+public class GerenciarProdutosView extends javax.swing.JFrame {
+
+    /**
+     * Creates new form GerenciarProdutos
      */
-    public GerenciarProdutosView() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
-       
+    public GerenciarProdutosView() throws SQLException {
         initComponents();
-        CurvaABCController c_controller = new CurvaABCController();
-        preencherTabela(c_controller.getCurva());
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        
+        ProdutoController p_controller = new ProdutoController();
+        preencherTabela(p_controller);
     }
     
     // Arrendondamento
@@ -45,7 +46,7 @@ public class GerenciarProdutosView extends javax.swing.JFrame{
 
     
     //Preenche a tabela de acordo com um arraylist
-    public void preencherTabela(CurvaABC curva){
+    public void preencherTabela(ProdutoController p_controller){
         
         // Cria o modelo da tabela e define como ordenável
         DefaultTableModel model = (DefaultTableModel) tabelaGerenciar.getModel();
@@ -59,7 +60,7 @@ public class GerenciarProdutosView extends javax.swing.JFrame{
         for (int i = 0; i < 4; i++) tabelaGerenciar.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
         
         // Inicializa a lista de produtos
-        ArrayList<Produto> produtos = curva.getProdutos();
+        ArrayList<Produto> produtos = p_controller.getProdutos();
         
         
         for (int i = 0; i < produtos.size(); i++){
@@ -85,11 +86,12 @@ public class GerenciarProdutosView extends javax.swing.JFrame{
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaGerenciar = new javax.swing.JTable();
-        button_add = new javax.swing.JButton();
+        button_adicionar = new javax.swing.JButton();
         button_editar = new javax.swing.JButton();
         button_remover = new javax.swing.JButton();
         button_atualizar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        button_fechar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,15 +100,23 @@ public class GerenciarProdutosView extends javax.swing.JFrame{
 
             },
             new String [] {
-                "Código", "Valor unitário", "Qtd. média consumo", "Criticidade"
+                "Código", "Valor unitário", "Qtd. Média Vendida", "Criticidade"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tabelaGerenciar);
 
-        button_add.setText("Adicionar...");
-        button_add.addMouseListener(new java.awt.event.MouseAdapter() {
+        button_adicionar.setText("Adicionar...");
+        button_adicionar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                button_addMouseClicked(evt);
+                button_adicionarMouseClicked(evt);
             }
         });
 
@@ -120,39 +130,26 @@ public class GerenciarProdutosView extends javax.swing.JFrame{
         button_remover.setText("Remover");
         button_remover.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    button_removerMouseClicked(evt);
-                } catch (SQLException ex) {
-                    Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                button_removerMouseClicked(evt);
             }
         });
 
         button_atualizar.setText("Atualizar");
         button_atualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    button_atualizarMouseClicked(evt);
-                } catch (SQLException ex) {
-                    Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InstantiationException ex) {
-                    Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
-                    Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                button_atualizarMouseClicked(evt);
             }
         });
 
-        jButton1.setText("Fechar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        button_fechar.setText("Fechar");
+        button_fechar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                button_fecharMouseClicked(evt);
             }
         });
+
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
+        jLabel1.setText("Gerenciar Produtos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,41 +158,47 @@ public class GerenciarProdutosView extends javax.swing.JFrame{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(button_add)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(button_editar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(button_remover)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(button_atualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(button_adicionar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(button_editar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(button_remover)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(button_atualizar))
+                            .addComponent(button_fechar, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(button_add)
+                    .addComponent(button_adicionar)
                     .addComponent(button_editar)
                     .addComponent(button_remover)
                     .addComponent(button_atualizar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(button_fechar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void button_addMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_addMouseClicked
-            AddProdutoView t = null;
+    private void button_adicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_adicionarMouseClicked
+        AddProdutoView t = null;
         try {
             t = new AddProdutoView();
         } catch (ClassNotFoundException ex) {
@@ -203,26 +206,10 @@ public class GerenciarProdutosView extends javax.swing.JFrame{
         }
             Window w = new Window(t);
             t.setVisible(true);
-    }//GEN-LAST:event_button_addMouseClicked
-
-    private void button_atualizarMouseClicked(java.awt.event.MouseEvent evt) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {//GEN-FIRST:event_button_atualizarMouseClicked
-        CurvaABCController c_controller = new CurvaABCController();
-        preencherTabela(c_controller.getCurva());
-    }//GEN-LAST:event_button_atualizarMouseClicked
-
-    private void button_removerMouseClicked(java.awt.event.MouseEvent evt) throws SQLException, ClassNotFoundException {//GEN-FIRST:event_button_removerMouseClicked
-        int selectedRow = tabelaGerenciar.getSelectedRow();
-        Produto p = new Produto();
-        
-        p.setId((tabelaGerenciar.getValueAt(selectedRow, 0)).toString());
-        
-        ConexaoDB.removerProduto(GerenciarProdutosView.this, p);
-
-
-    }//GEN-LAST:event_button_removerMouseClicked
+    }//GEN-LAST:event_button_adicionarMouseClicked
 
     private void button_editarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_editarMouseClicked
-            AddProdutoView t = null;
+       AddProdutoView t = null;
             int selectedRow = tabelaGerenciar.getSelectedRow();
         try {
             t = new AddProdutoView(selectedRow);
@@ -233,9 +220,32 @@ public class GerenciarProdutosView extends javax.swing.JFrame{
             t.setVisible(true);
     }//GEN-LAST:event_button_editarMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        this.dispose();
-    }//GEN-LAST:event_jButton1MouseClicked
+    private void button_removerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_removerMouseClicked
+        int selectedRow = tabelaGerenciar.getSelectedRow();
+        Produto p = new Produto();
+        
+        p.setId((tabelaGerenciar.getValueAt(selectedRow, 0)).toString());
+        
+        try {
+            ConexaoDB.removerProduto(GerenciarProdutosView.this, p);
+        } catch (SQLException ex) {
+            Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_button_removerMouseClicked
+
+    private void button_atualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_atualizarMouseClicked
+        ProdutoController p_controller = null;
+        try {
+            p_controller = new ProdutoController();
+        } catch (SQLException ex) {
+            Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        preencherTabela(p_controller);
+    }//GEN-LAST:event_button_atualizarMouseClicked
+
+    private void button_fecharMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_fecharMouseClicked
+         this.dispose();
+    }//GEN-LAST:event_button_fecharMouseClicked
 
     /**
      * @param args the command line arguments
@@ -268,29 +278,22 @@ public class GerenciarProdutosView extends javax.swing.JFrame{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
                 try {
                     new GerenciarProdutosView().setVisible(true);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InstantiationException ex) {
-                    Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
-                    Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SQLException ex) {
                     Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton button_add;
+    private javax.swing.JButton button_adicionar;
     private javax.swing.JButton button_atualizar;
     private javax.swing.JButton button_editar;
+    private javax.swing.JButton button_fechar;
     private javax.swing.JButton button_remover;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable tabelaGerenciar;
     // End of variables declaration//GEN-END:variables

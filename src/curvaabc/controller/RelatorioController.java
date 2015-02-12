@@ -22,8 +22,10 @@ public class RelatorioController {
     
     // Cria o relatório
     public String print() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
-        CurvaABCController c_controller = new CurvaABCController();
-        CurvaABC curva = c_controller.getCurva();
+        
+        ProdutoController p_controller = new ProdutoController();
+        CurvaABC curva = new CurvaABC();
+
         
         // Atualiza porcentagem
         double porcentagemA = (curva.getClasseA_porcentagem());
@@ -34,7 +36,7 @@ public class RelatorioController {
         ArrayList<Produto> a = new ArrayList<Produto>();
         ArrayList<Produto> b = new ArrayList<Produto>();
         ArrayList<Produto> c = new ArrayList<Produto>();
-        ArrayList<Produto> produtos = curva.getProdutos();
+        ArrayList<Produto> produtos = p_controller.getProdutos();
         
         // Atualiza lista de classes
         for (int i = 0; i < produtos.size(); i++){

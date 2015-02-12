@@ -5,7 +5,8 @@
  */
 package curvaabc.view;
 
-import curvaabc.controller.CurvaABCController;
+import curvaabc.controller.CurvaController;
+import curvaabc.controller.ProdutoController;
 import curvaabc.controller.RelatorioController;
 import curvaabc.model.Produto;
 import static curvaabc.view.TabelaABCView.round;
@@ -28,6 +29,7 @@ public class TabelaABCCriticidadeView extends javax.swing.JFrame {
      */
     public TabelaABCCriticidadeView() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         
         // Preenche a tabela
         preencherTabela();
@@ -35,7 +37,7 @@ public class TabelaABCCriticidadeView extends javax.swing.JFrame {
     
      //Preenche a tabela de acordo com um arraylist
     private void preencherTabela() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
-        CurvaABCController c_controller = new CurvaABCController();
+        ProdutoController p_controller = new ProdutoController();
 
         // Cria o modelo da tabela e define como ordenável
         DefaultTableModel model = (DefaultTableModel) tabelaABCCriticidade.getModel();
@@ -46,15 +48,15 @@ public class TabelaABCCriticidadeView extends javax.swing.JFrame {
         rightRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         for (int i = 0; i < 7; i++) tabelaABCCriticidade.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
         
-        inserirProdutosTabela(c_controller, model);
+        inserirProdutosTabela(p_controller, model);
 
     }
     
-    private void inserirProdutosTabela(CurvaABCController c_controller, DefaultTableModel model ){
+    private void inserirProdutosTabela(ProdutoController p_controller, DefaultTableModel model ) throws SQLException{
                 
          // Inicializa a lista de produtos
-        c_controller.sortByCriterio(c_controller.getCurva().getProdutos());        
-        ArrayList<Produto> produtos = c_controller.getCurva().getProdutos();
+        p_controller.sortByCriterio(p_controller.getProdutos());        
+        ArrayList<Produto> produtos = p_controller.getProdutos();
         
         int classeA = 0;
         int classeB = 0;
@@ -69,7 +71,7 @@ public class TabelaABCCriticidadeView extends javax.swing.JFrame {
             double valor = p.getValorTotal();
             
             // Classe
-            String classe = c_controller.getClasse(p);
+            String classe = p_controller.getClasse(p);
             
             // Criterio
             String criterio = classe+p.getCriticidade();

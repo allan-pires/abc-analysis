@@ -28,6 +28,7 @@ public class ConfigurarClassificacaoView extends javax.swing.JFrame {
     public ConfigurarClassificacaoView() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         initComponents();
         getConfig();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
     
     private void getConfig() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{

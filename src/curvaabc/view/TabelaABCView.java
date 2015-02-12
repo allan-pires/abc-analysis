@@ -5,7 +5,8 @@
  */
 package curvaabc.view;
 import curvaabc.model.CurvaABC;
-import curvaabc.controller.CurvaABCController;
+import curvaabc.controller.CurvaController;
+import curvaabc.controller.ProdutoController;
 import curvaabc.model.Produto;
 import curvaabc.controller.RelatorioController;
 import java.sql.SQLException;
@@ -28,7 +29,7 @@ public class TabelaABCView extends javax.swing.JFrame {
     // Construtor
     public TabelaABCView() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         initComponents();
-        
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         // Preenche a tabela
         preencherTabela();
         
@@ -47,7 +48,7 @@ public class TabelaABCView extends javax.swing.JFrame {
     
     //Preenche a tabela de acordo com um arraylist
     private void preencherTabela() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
-        CurvaABCController c_controller = new CurvaABCController();
+        ProdutoController p_controller = new ProdutoController();
 
         // Cria o modelo da tabela e define como ordenável
         DefaultTableModel model = (DefaultTableModel) tabelaABC.getModel();
@@ -58,16 +59,16 @@ public class TabelaABCView extends javax.swing.JFrame {
         rightRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         for (int i = 0; i < 9; i++) tabelaABC.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
         
-       inserirProdutosTabela(c_controller, model);
+       inserirProdutosTabela(p_controller, model);
         
         RelatorioController r = new RelatorioController();
         System.out.println(r.print());
     }
     
-    private void inserirProdutosTabela(CurvaABCController c_controller, DefaultTableModel model ){
+    private void inserirProdutosTabela(ProdutoController p_controller, DefaultTableModel model ) throws SQLException{
         
          // Inicializa a lista de produtos
-        ArrayList<Produto> produtos = c_controller.getCurva().getProdutos();
+        ArrayList<Produto> produtos = p_controller.getProdutos();
         
         // Inicializa os valores de ordem ABC
         int ordem = 1;
@@ -87,7 +88,7 @@ public class TabelaABCView extends javax.swing.JFrame {
             porcentagem_acumulada = p.getPorcentagem_acumulada()*100.0;
             
             // Classe
-            String classe = c_controller.getClasse(p);
+            String classe = p_controller.getClasse(p);
             
             // Porcentagem acumulada ABC
             double porcentagem_abc = ((double)ordem/ (double)produtos.size())*100.0;

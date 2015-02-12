@@ -6,10 +6,13 @@
 package curvaabc.view;
 
 import curvaabc.ConexaoDB;
+import curvaabc.controller.CurvaController;
+import curvaabc.controller.ProdutoController;
 import curvaabc.model.Produto;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -23,11 +26,13 @@ public class AddProdutoView extends javax.swing.JFrame {
     //Conexão com o banco de dados
     Connection db_con;
     int row = -1;
+    
 
     // Construtor
     public AddProdutoView() throws ClassNotFoundException {
         initComponents();
         conectarBD();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
     
     // Construtor
@@ -52,6 +57,7 @@ public class AddProdutoView extends javax.swing.JFrame {
     private void conectarBD( ) throws ClassNotFoundException {
         db_con = ConexaoDB.getConexao();
     }
+   
     
     // Adiciona o produto no banco de dados
     private void adicionarProduto() throws SQLException, ClassNotFoundException{
@@ -63,19 +69,23 @@ public class AddProdutoView extends javax.swing.JFrame {
         Integer criticidade = Integer.parseInt(combo_criticidade.getSelectedItem().toString());
         Produto p = new Produto(id, preco, quantidade, criticidade);
         
+        ProdutoController c_controller = new ProdutoController();
+        
        // Verifica corretude dos inputs
-        if (quantidade > 0 && preco > 0){
+
+        if (c_controller.produtoOk(p)) {
             
             if (row > -1){
-                ConexaoDB.alterarProduto(AddProdutoView.this, p);
-                row = -1;
+                    c_controller.alterarProduto(this, p);
+                    row = -1;
             }
-            else ConexaoDB.adicionarProduto(AddProdutoView.this, p);
             
-            // Resetar campos
-            resetCampos();
-        }
-        
+            else c_controller.adicionarProduto(this, p);
+
+                // Resetar campos
+                resetCampos();
+        }       
+
         else {
             JOptionPane.showMessageDialog(AddProdutoView.this, "Dados incorretos");
         }

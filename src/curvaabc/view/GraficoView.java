@@ -39,6 +39,7 @@ public class GraficoView extends javax.swing.JFrame {
     public GraficoView() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
 
         GraficoController g = new GraficoController();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         ChartPanel c= g.getGrafico().getChartPanel();
         setContentPane(c);
 

@@ -129,7 +129,7 @@ public class ConexaoDB {
         }
     
     // Adiciona o produto no banco de dados
-    public static void adicionarProduto(Component view, Produto p) throws SQLException, ClassNotFoundException{
+    public static void adicionarProduto(Component view, Produto p) throws SQLException{
 
             // Cria o comando SQL para inserir produto
             String sql = "INSERT INTO PRODUTO (ID, PRECO, VENDIDOS, CRITICIDADE) VALUES "
@@ -145,7 +145,7 @@ public class ConexaoDB {
     }
     
     // Adiciona o produto no banco de dados
-    public static void alterarProduto(Component view, Produto p) throws SQLException, ClassNotFoundException{
+    public static void alterarProduto(Component view, Produto p) throws SQLException{
 
             // Cria o comando SQL para inserir produto
             String sql = "UPDATE PRODUTO SET ID="+p.getId()+", PRECO="+p.getPreco()+", VENDIDOS="+p.getVendidos()+", CRITICIDADE="+p.getCriticidade()+" WHERE "
@@ -160,7 +160,7 @@ public class ConexaoDB {
 
     }
     
-    public static void removerProduto(Component view, Produto p)  throws SQLException, ClassNotFoundException{
+    public static void removerProduto(Component view, Produto p)  throws SQLException{
             
             // Cria o comando SQL para inserir produto
             String sql = "DELETE FROM PRODUTO WHERE "
@@ -172,6 +172,7 @@ public class ConexaoDB {
             //Feedback
             System.out.println("Produto removido.");
             JOptionPane.showMessageDialog(view, "Produto removido!");
+            
     }
     
     public static ResultSet executarQuery (String sql) throws SQLException{

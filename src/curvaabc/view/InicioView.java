@@ -247,12 +247,6 @@ public class InicioView extends javax.swing.JFrame {
             GerenciarProdutosView t = null;
         try {
             t = new GerenciarProdutosView();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -340,7 +334,18 @@ public class InicioView extends javax.swing.JFrame {
 
     private void button_analiseABCCriticidadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_analiseABCCriticidadeMouseClicked
  
-            TabelaABCCriticidadeView t = new TabelaABCCriticidadeView();
+            TabelaABCCriticidadeView t = null;
+        try {
+            t = new TabelaABCCriticidadeView();
+        } catch (SQLException ex) {
+            Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
+        }
             Window w = new Window(t);
             t.setVisible(true);
 

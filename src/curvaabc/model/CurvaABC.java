@@ -5,7 +5,11 @@
  */
 package curvaabc.model;
 
+import curvaabc.ConexaoDB;
+import curvaabc.controller.ProdutoController;
 import curvaabc.view.InicioView;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -25,64 +29,28 @@ public final class CurvaABC {
     
     private double classeC_porcentagem;
 
-    // Valor total de produtos vendidos
-    private double valor_total;
-    
-    /*
-    // Quantidade total de produtos vendidos
-    private double quantidade_total;
-    
-    // Valor acumulado de cada produto
-    private ArrayList<Double> valor_acumulado;
-    
-    // Porcentagem de valor acumulada de cada produto
-    private ArrayList<Double> porcentagem_acumulada;
-    
-    // Quantidade de produto acumulado
-    private ArrayList<Double> quantidade_acumulada;
-    */
-    
-    // Lista de produtos
-    private ArrayList<Produto> produtos;
-
 
     //Construtor sem parâmetros
-    public CurvaABC() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public CurvaABC() throws SQLException  {
 
         //Instancia porcentagem de classes
         this.classeA_porcentagem = 0.7;
         this.classeB_porcentagem = 0.2;
         this.classeC_porcentagem = 0.1;
 
-        // Zera o valor acumulado
-        this.valor_total = 0;
+        atualizarConfiguração();
 
-        produtos = new ArrayList<>();
-        /*
-        valor_acumulado = new ArrayList<>();
-        porcentagem_acumulada = new ArrayList<>();
-        quantidade_acumulada = new ArrayList<>();
-                */
 
     }
 
     // Construtor com parâmetros
-    public CurvaABC(double a, double b, double c) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public CurvaABC(double a, double b, double c)  {
 
         //Instancia porcentagem de classes
         this.classeA_porcentagem = a;
         this.classeB_porcentagem = b;
         this.classeC_porcentagem = c;
 
-        // Zera o valor acumulado
-        this.valor_total = 0;
-        
-        produtos = new ArrayList<>();
-        /*
-        valor_acumulado = new ArrayList<>();
-        porcentagem_acumulada = new ArrayList<>();
-        quantidade_acumulada = new ArrayList<>();
-                */
     }
 
     public double getClasseA_porcentagem() {
@@ -109,81 +77,38 @@ public final class CurvaABC {
         this.classeC_porcentagem = classeC_porcentagem;
     }
 
-    public double getValor_total() {
-        return valor_total;
+     // Atualizar configuração
+    private void atualizarConfiguração() throws SQLException {
+        String sql = "SELECT * FROM CLASSECONFIG";
+        ResultSet list = ConexaoDB.executarQuery(sql);
+
+        // Enquanto ainda houver produtos
+        while (list.next()) {
+
+            // Inicia variáveis de acordo o banco de dados
+            double a = Double.valueOf(list.getString(1));
+            double b = Double.valueOf(list.getString(2));
+            double c = Double.valueOf(list.getString(3));
+
+            // Atualiza variáveis
+            setClasseA_porcentagem (round(a,2));
+            setClasseB_porcentagem (round(b,2));
+            setClasseC_porcentagem (round(c,2));
+
+        }
     }
 
-    public void setValor_total(double valor_total) {
-        this.valor_total = valor_total;
-    }
-    /*
-    public double getQuantidade_total() {
-        return quantidade_total;
-    }
+    // Arrendondamento
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
 
-    public void setQuantidade_total(double quantidade_total) {
-        this.quantidade_total = quantidade_total;
-    }
-
-    public ArrayList<Double> getValor_acumulado() {
-        return valor_acumulado;
-    }
-
-    public void setValor_acumulado(ArrayList<Double> valor_acumulado) {
-        this.valor_acumulado = valor_acumulado;
-    }
-
-    public ArrayList<Double> getPorcentagem_acumulada() {
-        return porcentagem_acumulada;
-    }
-
-    public void setPorcentagem_acumulada(ArrayList<Double> porcentagem_acumulada) {
-        this.porcentagem_acumulada = porcentagem_acumulada;
-    }
-
-    public ArrayList<Double> getQuantidade_acumulada() {
-        return quantidade_acumulada;
-    }
-
-    public void setQuantidade_acumulada(ArrayList<Double> quantidade_acumulada) {
-        this.quantidade_acumulada = quantidade_acumulada;
-    }
-    
-    public void addQuantidade_acumulada(Double v) {
-        this.quantidade_acumulada.add(v);
-    }
-    */
-
-    public ArrayList<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(ArrayList<Produto> produtos) {
-        this.produtos = produtos;
-    }
-
-    // Retorna a porcentagem do produto em relação ao valor total
-    public double getPorcentagemValor(Produto produto) {
-        return produto.getValorTotal() / valor_total;
-    }
-    
-    /*
-    // Retorna a porcentagem do produto em relação ao total de produtos vendidos
-    public double getPorcentagemQuantidade(Produto produto) {
-        return produto.getVendidos() / quantidade_total;
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
     }
     
     
-    public void addPorcentagem_acumulada(double p) {
-       this.porcentagem_acumulada.add(p);
-    }
-
-    public void addValor_acumulado(double v) {
-        this.valor_acumulado.add(v);
-    }
-    */
-    
-
     public static void main(String[] args) {
         InicioView t = new InicioView();
         t.show();

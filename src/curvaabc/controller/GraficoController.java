@@ -63,10 +63,11 @@ public class GraficoController {
         ArrayList<Produto> b = new ArrayList<Produto>();
         ArrayList<Produto> c = new ArrayList<Produto>();
         
-        CurvaABCController c_controller = new CurvaABCController();
+        CurvaController c_controller = new CurvaController();
+        ProdutoController p_controller = new ProdutoController();
         
         // Atualiza lista de classes
-        ArrayList<Produto> produtos = c_controller.getCurva().getProdutos();
+        ArrayList<Produto> produtos = p_controller.getProdutos();
         for (int i = 0; i < produtos.size(); i++){
             Produto p = produtos.get(i);
             String classe = p.getClasse();

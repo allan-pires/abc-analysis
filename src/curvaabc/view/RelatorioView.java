@@ -22,6 +22,7 @@ public class RelatorioView extends javax.swing.JFrame {
      */
     public RelatorioView() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         CurvaABC curva = new CurvaABC();
         RelatorioController r = new RelatorioController();
         label_relatorio.setText(r.print());
