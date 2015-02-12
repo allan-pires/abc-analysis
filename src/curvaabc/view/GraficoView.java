@@ -9,6 +9,7 @@ package curvaabc.view;
 import curvaabc.controller.GraficoController;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,7 +36,7 @@ public class GraficoView extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 1L;
 
-    public GraficoView() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public GraficoView() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
 
         GraficoController g = new GraficoController();
         ChartPanel c= g.getGrafico().getChartPanel();
@@ -144,6 +145,8 @@ public class GraficoView extends javax.swing.JFrame {
                 } catch (InstantiationException ex) {
                     Logger.getLogger(GraficoView.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IllegalAccessException ex) {
+                    Logger.getLogger(GraficoView.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
                     Logger.getLogger(GraficoView.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 demo.pack();

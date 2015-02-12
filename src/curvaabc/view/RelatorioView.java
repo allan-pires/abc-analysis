@@ -7,6 +7,7 @@ package curvaabc.view;
 
 import curvaabc.model.CurvaABC;
 import curvaabc.controller.RelatorioController;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,7 +20,7 @@ public class RelatorioView extends javax.swing.JFrame {
     /**
      * Creates new form RelatorioView
      */
-    public RelatorioView() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public RelatorioView() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         initComponents();
         CurvaABC curva = new CurvaABC();
         RelatorioController r = new RelatorioController();
@@ -127,6 +128,8 @@ public class RelatorioView extends javax.swing.JFrame {
                 } catch (InstantiationException ex) {
                     Logger.getLogger(RelatorioView.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IllegalAccessException ex) {
+                    Logger.getLogger(RelatorioView.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
                     Logger.getLogger(RelatorioView.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

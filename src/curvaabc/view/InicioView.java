@@ -48,6 +48,7 @@ public class InicioView extends javax.swing.JFrame {
         button_gerenciar_itens.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         button_gerenciar_itens.setText("Gerenciar itens");
         button_gerenciar_itens.setBorder(button_relatorio1.getBorder());
+        button_gerenciar_itens.setPreferredSize(new java.awt.Dimension(193, 23));
         button_gerenciar_itens.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 button_gerenciar_itensMouseClicked(evt);
@@ -62,6 +63,9 @@ public class InicioView extends javax.swing.JFrame {
         button_relatorio1.setBackground(new java.awt.Color(241, 241, 241));
         button_relatorio1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         button_relatorio1.setText("Exibir planilha sem criticidade");
+        button_relatorio1.setMaximumSize(new java.awt.Dimension(113, 23));
+        button_relatorio1.setMinimumSize(new java.awt.Dimension(113, 23));
+        button_relatorio1.setPreferredSize(new java.awt.Dimension(193, 23));
         button_relatorio1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 button_relatorio1MouseClicked(evt);
@@ -80,6 +84,8 @@ public class InicioView extends javax.swing.JFrame {
         button_grafico.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         button_grafico.setText("Exibir gráfico");
         button_grafico.setBorder(button_relatorio1.getBorder());
+        button_grafico.setMaximumSize(new java.awt.Dimension(113, 23));
+        button_grafico.setMinimumSize(new java.awt.Dimension(113, 23));
         button_grafico.setPreferredSize(new java.awt.Dimension(203, 34));
         button_grafico.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -96,6 +102,7 @@ public class InicioView extends javax.swing.JFrame {
         button_sair.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         button_sair.setText("Sair");
         button_sair.setBorder(button_relatorio1.getBorder());
+        button_sair.setMaximumSize(new java.awt.Dimension(113, 23));
         button_sair.setPreferredSize(new java.awt.Dimension(61, 34));
         button_sair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -109,6 +116,8 @@ public class InicioView extends javax.swing.JFrame {
         button_configuracoes.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         button_configuracoes.setText("Configurações de classificação");
         button_configuracoes.setBorder(button_relatorio1.getBorder());
+        button_configuracoes.setMaximumSize(new java.awt.Dimension(113, 23));
+        button_configuracoes.setMinimumSize(new java.awt.Dimension(113, 23));
         button_configuracoes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 button_configuracoesMouseClicked(evt);
@@ -123,6 +132,9 @@ public class InicioView extends javax.swing.JFrame {
         button_relatorio2.setBackground(new java.awt.Color(241, 241, 241));
         button_relatorio2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         button_relatorio2.setText("Exibir relatório");
+        button_relatorio2.setMaximumSize(new java.awt.Dimension(113, 23));
+        button_relatorio2.setMinimumSize(new java.awt.Dimension(113, 23));
+        button_relatorio2.setPreferredSize(new java.awt.Dimension(193, 23));
         button_relatorio2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 button_relatorio2MouseClicked(evt);
@@ -199,6 +211,8 @@ public class InicioView extends javax.swing.JFrame {
             Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_button_relatorio1MouseClicked
 
@@ -211,6 +225,8 @@ public class InicioView extends javax.swing.JFrame {
         } catch (InstantiationException ex) {
             Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
+            Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
         }
             Window w = new Window(t);
@@ -234,6 +250,8 @@ public class InicioView extends javax.swing.JFrame {
         } catch (InstantiationException ex) {
             Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
+            Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
         }
         v.setSize(800, 600);
@@ -269,6 +287,8 @@ public class InicioView extends javax.swing.JFrame {
         } catch (InstantiationException ex) {
             Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
+            Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
         }
         v.setSize(800, 400);

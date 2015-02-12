@@ -9,6 +9,7 @@ import curvaabc.model.CurvaABC;
 import static curvaabc.view.TabelaABCView.round;
 import curvaabc.model.Relatorio;
 import curvaabc.model.Produto;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -20,7 +21,7 @@ public class RelatorioController {
     Relatorio relatorio = new Relatorio();
     
     // Cria o relatório
-    public String print(){
+    public String print() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         CurvaABCController c_controller = new CurvaABCController();
         CurvaABC curva = c_controller.getCurva();
         

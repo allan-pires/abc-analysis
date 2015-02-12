@@ -129,16 +129,16 @@ public class AddProdutoView extends javax.swing.JFrame {
         jLabel4.setText("Criticidade");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("Adicionar produto");
+        jLabel5.setText("Adicionar / Editar produto");
 
-        button_adicionar.setText("Adicionar");
+        button_adicionar.setText("Salvar");
         button_adicionar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 button_adicionarMouseClicked(evt);
             }
         });
 
-        button_cancelar.setText("Cancelar");
+        button_cancelar.setText("Fechar");
         button_cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 button_cancelarMouseClicked(evt);
@@ -171,7 +171,7 @@ public class AddProdutoView extends javax.swing.JFrame {
                                     .addComponent(combo_criticidade, 0, 90, Short.MAX_VALUE))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 41, Short.MAX_VALUE)
+                                .addGap(0, 65, Short.MAX_VALUE)
                                 .addComponent(button_adicionar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(button_cancelar))

@@ -33,30 +33,14 @@ public class CurvaABCController {
     //Conexão com o banco de dados
     private Connection db_con;
 
-    public CurvaABCController() {
+    public CurvaABCController() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         
-        try {
-            // Conecta ao banco de dados
-            conectarBD();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CurvaABCController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(CurvaABCController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(CurvaABCController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        // Conecta ao banco de dados
+        conectarBD();
 
-        try {
-            // Popula o array de produtos e atualiza variáveis
-            curva = new CurvaABC();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CurvaABCController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(CurvaABCController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(CurvaABCController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        // Popula o array de produtos e atualiza variáveis
+        curva = new CurvaABC();
+
         atualizarConfiguração();
         popularArrayListProdutos();
         sortByValorTotal(curva.getProdutos());
@@ -74,66 +58,49 @@ public class CurvaABCController {
     }
     
     // Atualizar configuração
-    private void atualizarConfiguração() {
-        try {
-            // Pega os dados do banco de dados
-            Statement stmt = db_con.createStatement();
-            ResultSet list = stmt.executeQuery("SELECT * FROM CLASSECONFIG");
+    private void atualizarConfiguração() throws SQLException {
+        String sql = "SELECT * FROM CLASSECONFIG";
+        ResultSet list = ConexaoDB.executarQuery(sql);
 
-            try {
-                // Enquanto ainda houver produtos
-                while (list.next()) {
+        // Enquanto ainda houver produtos
+        while (list.next()) {
 
-                    // Inicia variáveis de acordo o banco de dados
-                    double a = Double.valueOf(list.getString(1));
-                    double b = Double.valueOf(list.getString(2));
-                    double c = Double.valueOf(list.getString(3));
+            // Inicia variáveis de acordo o banco de dados
+            double a = Double.valueOf(list.getString(1));
+            double b = Double.valueOf(list.getString(2));
+            double c = Double.valueOf(list.getString(3));
 
-                    // Atualiza variáveis
-                    curva.setClasseA_porcentagem (round(a,2));
-                    curva.setClasseB_porcentagem (round(b,2));
-                    curva.setClasseC_porcentagem (round(c,2));
+            // Atualiza variáveis
+            curva.setClasseA_porcentagem (round(a,2));
+            curva.setClasseB_porcentagem (round(b,2));
+            curva.setClasseC_porcentagem (round(c,2));
 
-                }
-
-            } catch (SQLException q) {
-            }
-        } catch (SQLException e) {
         }
-
     }
 
     // Popula a lista de produtos com dados do banco
-    private void popularArrayListProdutos() {
-        try {
-            // Pega os dados do banco de dados
-            Statement stmt = db_con.createStatement();
-            ResultSet list = stmt.executeQuery("SELECT * FROM PRODUTO");
+    private void popularArrayListProdutos() throws SQLException {
+  
+        // Pega os dados do banco de dados
+        String sql = "SELECT * FROM PRODUTO";
+        ResultSet list = ConexaoDB.executarQuery(sql);
 
-            try {
-                // Enquanto ainda houver produtos
-                while (list.next()) {
+        // Enquanto ainda houver produtos
+        while (list.next()) {
 
-                    // Inicia variáveis de acordo o banco de dados
-                    String id = list.getString(1);
-                    Double preco = Double.parseDouble(list.getString(2));
-                    int vendidos = Integer.parseInt(list.getString(3));
-                    Integer criticidade = Integer.parseInt(list.getString(4));
+            // Inicia variáveis de acordo o banco de dados
+            String id = list.getString(1);
+            Double preco = Double.parseDouble(list.getString(2));
+            int vendidos = Integer.parseInt(list.getString(3));
+            Integer criticidade = Integer.parseInt(list.getString(4));
 
-                    // Cria um novo produto com os dados do banco
-                    Produto p = new Produto(id, preco, vendidos, criticidade);
+            // Cria um novo produto com os dados do banco
+            Produto p = new Produto(id, preco, vendidos, criticidade);
 
-                    // Adiciona o produto numa lista de produtos
-                    curva.getProdutos().add(p);
+            // Adiciona o produto numa lista de produtos
+            curva.getProdutos().add(p);
 
-                }
-
-            } catch (SQLException q) {
-            }
-        } catch (SQLException e) {
         }
-        
-
     }
 
     // Ordena um arraylist de produtos

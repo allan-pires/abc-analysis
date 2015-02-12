@@ -8,6 +8,7 @@ import curvaabc.model.CurvaABC;
 import curvaabc.controller.CurvaABCController;
 import curvaabc.model.Produto;
 import curvaabc.controller.RelatorioController;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +26,7 @@ public class TabelaABCView extends javax.swing.JFrame {
     
 
     // Construtor
-    public TabelaABCView() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public TabelaABCView() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         initComponents();
         
         // Preenche a tabela
@@ -45,7 +46,7 @@ public class TabelaABCView extends javax.swing.JFrame {
 
     
     //Preenche a tabela de acordo com um arraylist
-    private void preencherTabela(){
+    private void preencherTabela() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         CurvaABCController c_controller = new CurvaABCController();
         CurvaABC curva = c_controller.getCurva();
         
@@ -239,6 +240,8 @@ public class TabelaABCView extends javax.swing.JFrame {
                 } catch (InstantiationException ex) {
                     Logger.getLogger(TabelaABCView.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IllegalAccessException ex) {
+                    Logger.getLogger(TabelaABCView.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
                     Logger.getLogger(TabelaABCView.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

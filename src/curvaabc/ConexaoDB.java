@@ -109,8 +109,7 @@ public class ConexaoDB {
             System.out.println("Criada tabela PRODUTO");
         }
     
-
-// Cria a tabela CLASSECONFIG
+    // Cria a tabela CLASSECONFIG
     private static void criarTabelaClasseConfig(Connection con) throws SQLException {
             
             String sqlCreate = "CREATE TABLE CLASSECONFIG"
@@ -174,6 +173,12 @@ public class ConexaoDB {
             System.out.println("Produto removido.");
             JOptionPane.showMessageDialog(view, "Produto removido!");
     }
+    
+    public static ResultSet executarQuery (String sql) throws SQLException{
+        Statement stmt = getConexao().createStatement();
+        ResultSet list = stmt.executeQuery(sql);
+        return list;
     }
+  }
     
 

@@ -26,13 +26,11 @@ public class GerenciarProdutosView extends javax.swing.JFrame{
         /**
      * Creates new form GerenciarItensView
      */
-    public GerenciarProdutosView() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public GerenciarProdutosView() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
        
         initComponents();
         CurvaABCController c_controller = new CurvaABCController();
-        CurvaABC curva = c_controller.getCurva();
-        
-        preencherTabela(curva);
+        preencherTabela(c_controller.getCurva());
     }
     
     // Arrendondamento
@@ -51,7 +49,8 @@ public class GerenciarProdutosView extends javax.swing.JFrame{
         
         // Cria o modelo da tabela e define como ordenável
         DefaultTableModel model = (DefaultTableModel) tabelaGerenciar.getModel();
-        model.setRowCount(0);  
+        
+        model.setRowCount(0);
         tabelaGerenciar.setAutoCreateRowSorter(true);
         
         // Centraliza o texto
@@ -121,14 +120,30 @@ public class GerenciarProdutosView extends javax.swing.JFrame{
         button_remover.setText("Remover");
         button_remover.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                button_removerMouseClicked(evt);
+                try {
+                    button_removerMouseClicked(evt);
+                } catch (SQLException ex) {
+                    Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
         button_atualizar.setText("Atualizar");
         button_atualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                button_atualizarMouseClicked(evt);
+                try {
+                    button_atualizarMouseClicked(evt);
+                } catch (SQLException ex) {
+                    Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -190,33 +205,19 @@ public class GerenciarProdutosView extends javax.swing.JFrame{
             t.setVisible(true);
     }//GEN-LAST:event_button_addMouseClicked
 
-    private void button_atualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_atualizarMouseClicked
-        CurvaABC curva = null;
-        try {
-            curva = new CurvaABC();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        preencherTabela(curva);
+    private void button_atualizarMouseClicked(java.awt.event.MouseEvent evt) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {//GEN-FIRST:event_button_atualizarMouseClicked
+        CurvaABCController c_controller = new CurvaABCController();
+        preencherTabela(c_controller.getCurva());
     }//GEN-LAST:event_button_atualizarMouseClicked
 
-    private void button_removerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_removerMouseClicked
+    private void button_removerMouseClicked(java.awt.event.MouseEvent evt) throws SQLException, ClassNotFoundException {//GEN-FIRST:event_button_removerMouseClicked
         int selectedRow = tabelaGerenciar.getSelectedRow();
         Produto p = new Produto();
         
         p.setId((tabelaGerenciar.getValueAt(selectedRow, 0)).toString());
         
-        try {
-            ConexaoDB.removerProduto(GerenciarProdutosView.this, p);
-        } catch (SQLException ex) {
-            Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ConexaoDB.removerProduto(GerenciarProdutosView.this, p);
+
 
     }//GEN-LAST:event_button_removerMouseClicked
 
@@ -267,6 +268,7 @@ public class GerenciarProdutosView extends javax.swing.JFrame{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+
                 try {
                     new GerenciarProdutosView().setVisible(true);
                 } catch (ClassNotFoundException ex) {
@@ -275,7 +277,10 @@ public class GerenciarProdutosView extends javax.swing.JFrame{
                     Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IllegalAccessException ex) {
                     Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(GerenciarProdutosView.class.getName()).log(Level.SEVERE, null, ex);
                 }
+
             }
         });
     }
