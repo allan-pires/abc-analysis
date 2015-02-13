@@ -108,8 +108,44 @@ public final class CurvaABC {
         return (double) tmp / factor;
     }
     
+    public ArrayList<Double> getConfig(){
+        try {
+
+            ResultSet list = ConexaoDB.executarQuery("SELECT * FROM CLASSECONFIG");
+
+            try {
+                // Enquanto ainda houver produtos
+                while (list.next()) {
+
+                    // Inicia variáveis de acordo o banco de dados
+                    double a = Double.valueOf(list.getString(1));
+                    double b = Double.valueOf(list.getString(2));
+                    double c = Double.valueOf(list.getString(3));
+                    ArrayList<Double> config = new ArrayList<>();
+                    config.add(a);
+                    config.add(b);
+                    config.add(c);
+                    
+                    return config;
+                }
+
+            } catch (SQLException q) {
+            }
+        } catch (SQLException e) {
+        }
+        return null;
+    }
     
-    public static void main(String[] args) {
+    public boolean checkConfig(double a, double b, double c){         
+            boolean limite_ok = ((a+b+c) <= 100.0);
+            boolean intersecao_ok = (a>b && b>c);
+            
+            return (limite_ok && intersecao_ok);
+    }
+
+    public static void main(String[] args) throws SQLException {
+        ConexaoDB.iniciarDB();
+        ConexaoDB.adicionarProdutosTeste();
         InicioView t = new InicioView();
         t.show();
     }

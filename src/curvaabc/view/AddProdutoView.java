@@ -6,7 +6,6 @@
 package curvaabc.view;
 
 import curvaabc.ConexaoDB;
-import curvaabc.controller.CurvaController;
 import curvaabc.controller.ProdutoController;
 import curvaabc.model.Produto;
 import java.sql.Connection;
@@ -31,14 +30,12 @@ public class AddProdutoView extends javax.swing.JFrame {
     // Construtor
     public AddProdutoView() throws ClassNotFoundException {
         initComponents();
-        conectarBD();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
     
     // Construtor
     public AddProdutoView(int i) throws ClassNotFoundException {
         initComponents();
-        conectarBD();
         row = i;
         
         String id = (GerenciarProdutosView.tabelaGerenciar.getValueAt(row, 0)).toString();
@@ -53,41 +50,43 @@ public class AddProdutoView extends javax.swing.JFrame {
         
     }
     
-    // Inicia variável de conexão com banco de dados
-    private void conectarBD( ) throws ClassNotFoundException {
-        db_con = ConexaoDB.getConexao();
+    public String corrigirStringPreco(String p){
+        String preco = p;
+        if (preco.contains(",")) preco = preco.replace(",", ".");
+        return preco;
     }
-   
-    
+
     // Adiciona o produto no banco de dados
     private void adicionarProduto() throws SQLException, ClassNotFoundException{
         
-        // Recebe os valores dos inputs e põe em variáveis
         String id = input_id.getText();
-        Double preco = Double.parseDouble(input_preco.getText());
-        int quantidade = Integer.parseInt(input_quantidade.getText());
-        Integer criticidade = Integer.parseInt(combo_criticidade.getSelectedItem().toString());
-        Produto p = new Produto(id, preco, quantidade, criticidade);
+        String preco = input_preco.getText();
+        String quantidade = input_quantidade.getText();
+        String criticidade = combo_criticidade.getSelectedItem().toString();
+        Produto p = new Produto();
+        // Recebe os valores dos inputs e põe em variáveis
+        if(p.dadosOk(this, id, preco, quantidade, criticidade)){
+            String preco_c = corrigirStringPreco(preco);
+            p = p.criarProduto(id, preco_c, quantidade, criticidade);
+        }
         
-        ProdutoController c_controller = new ProdutoController();
+        ProdutoController p_controller = new ProdutoController();
         
        // Verifica corretude dos inputs
-
-        if (c_controller.produtoOk(p)) {
+        if (p_controller.produtoOk(p)) {
             
             if (row > -1){
-                    c_controller.alterarProduto(this, p);
-                    row = -1;
+                p_controller.alterarProduto(this, p);
+                row = -1;
             }
-            
-            else c_controller.adicionarProduto(this, p);
+            else p_controller.adicionarProduto(this, p);
 
-                // Resetar campos
-                resetCampos();
+            // Resetar campos
+            resetCampos();
         }       
 
         else {
-            JOptionPane.showMessageDialog(AddProdutoView.this, "Dados incorretos");
+            JOptionPane.showMessageDialog(AddProdutoView.this, "DADOS INVÁLIDOS \n\n Certifique-se de que seus valores são positivos");
         }
     }
     

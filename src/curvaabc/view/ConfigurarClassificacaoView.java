@@ -6,14 +6,13 @@
 package curvaabc.view;
 
 import curvaabc.ConexaoDB;
+import curvaabc.model.CurvaABC;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
@@ -25,60 +24,33 @@ public class ConfigurarClassificacaoView extends javax.swing.JFrame {
     /**
      * Creates new form ConfigurarClassificacao
      */
-    public ConfigurarClassificacaoView() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+    public ConfigurarClassificacaoView() throws SQLException{
         initComponents();
         getConfig();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
     
-    private void getConfig() throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException{
-        try {
-            // Pega os dados do banco de dados
-            conectarBD();
-            db_con = ConexaoDB.getConexao();
-            Statement stmt = db_con.createStatement();
-            ResultSet list = stmt.executeQuery("SELECT * FROM CLASSECONFIG");
-
-            try {
-                // Enquanto ainda houver produtos
-                while (list.next()) {
-
-                    // Inicia variáveis de acordo o banco de dados
-                    double a = Double.valueOf(list.getString(1));
-                    double b = Double.valueOf(list.getString(2));
-                    double c = Double.valueOf(list.getString(3));
-                    
-                    input_a.setText(String.valueOf(a));
-                    input_b.setText(String.valueOf(b));
-                    input_c.setText(String.valueOf(c));
-
-                }
-
-            } catch (SQLException q) {
-            }
-        } catch (SQLException e) {
-        }
-        db_con.close();
+    private void getConfig() throws SQLException{
+        CurvaABC curva = new CurvaABC();
+        ArrayList<Double> config = curva.getConfig();
+        input_a.setText(String.valueOf(config.get(0)));
+        input_b.setText(String.valueOf(config.get(1)));
+        input_c.setText(String.valueOf(config.get(2)));
     }
     
-    private boolean checkConfig() throws ClassNotFoundException, InstantiationException, IllegalAccessException{
-            conectarBD();
-            
+    private boolean checkConfig() throws SQLException{         
             // Pega configurações modificadas
             double a = Double.valueOf(input_a.getText());
             double b = Double.valueOf(input_b.getText());
             double c = Double.valueOf(input_c.getText());
             
-            boolean limite_ok = ((a+b+c) <= 100.0);
-            boolean intersecao_ok = (a>b && b>c);
-            
-            return (limite_ok && intersecao_ok);
+            CurvaABC curva = new CurvaABC();
+            return curva.checkConfig(a, b, c);
     }
     
-    private void salvarConfig() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+    private void salvarConfig() throws SQLException{
             
             if (checkConfig()){
-                conectarBD();
             
                 // Pega configurações modificadas
                 double a = Double.valueOf(input_a.getText());
@@ -88,9 +60,7 @@ public class ConfigurarClassificacaoView extends javax.swing.JFrame {
                 // Cria o comando SQL para modificar as configurações
                 String sql = "UPDATE CLASSECONFIG SET A = "+a+", B = "+b+", C = "+c;
         
-                // Roda o comando SQL e adiciona o produto
-                Statement stmt = db_con.createStatement();
-                stmt.executeUpdate(sql);
+                ConexaoDB.executarUpdate(sql);
             
                 //Feedback
                 System.out.println("Modificadas configurações.");
@@ -99,13 +69,6 @@ public class ConfigurarClassificacaoView extends javax.swing.JFrame {
             else {
                 JOptionPane.showMessageDialog(ConfigurarClassificacaoView.this, "Problemas nas configurações! Certifique-se que a soma dos valores não seja superior a 100% e que não haja intersecção entre eles");
             }
-    }
-    
-    // Inicia variável de conexão com banco de dados
-    private void conectarBD() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        //String driver = "org.apache.derby.jdbc.ClientDriver";
-        //Class.forName(driver).newInstance();
-        db_con = ConexaoDB.getConexao();
     }
 
     /**
@@ -255,12 +218,6 @@ public class ConfigurarClassificacaoView extends javax.swing.JFrame {
             salvarConfig();
         } catch (SQLException ex) {
             Logger.getLogger(ConfigurarClassificacaoView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ConfigurarClassificacaoView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(ConfigurarClassificacaoView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(ConfigurarClassificacaoView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2MouseClicked
 
@@ -295,12 +252,6 @@ public class ConfigurarClassificacaoView extends javax.swing.JFrame {
             public void run() {
                 try {
                     new ConfigurarClassificacaoView().setVisible(true);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(ConfigurarClassificacaoView.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InstantiationException ex) {
-                    Logger.getLogger(ConfigurarClassificacaoView.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
-                    Logger.getLogger(ConfigurarClassificacaoView.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SQLException ex) {
                     Logger.getLogger(ConfigurarClassificacaoView.class.getName()).log(Level.SEVERE, null, ex);
                 }

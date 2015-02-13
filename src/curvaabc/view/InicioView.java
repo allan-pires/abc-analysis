@@ -283,12 +283,6 @@ public class InicioView extends javax.swing.JFrame {
          ConfigurarClassificacaoView v = null;
         try {
             v = new ConfigurarClassificacaoView();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(InicioView.class.getName()).log(Level.SEVERE, null, ex);
         }

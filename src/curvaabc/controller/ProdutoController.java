@@ -51,16 +51,14 @@ public class ProdutoController {
         
         public boolean produtoOk(Produto p){
             
+            // Verifica se ID é único
             for (int i = 0; i < produtos.size(); i++){
                 String id_atual = produtos.get(i).getId();
                 if (p.getId().equals(id_atual)) return false;
             }
             
-            if (produtos.contains(p)){
-                return false;
-            }
-            
-            if  (p.getVendidos() < 0 && p.getPreco() < 0){
+            // Verifica se valores não são negativos
+            if  (p.getVendidos() < 0 || p.getPreco() < 0){
                 return false;   
             }
             

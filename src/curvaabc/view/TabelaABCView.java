@@ -5,7 +5,6 @@
  */
 package curvaabc.view;
 import curvaabc.model.CurvaABC;
-import curvaabc.controller.CurvaController;
 import curvaabc.controller.ProdutoController;
 import curvaabc.model.Produto;
 import curvaabc.controller.RelatorioController;

@@ -6,11 +6,18 @@
 package curvaabc.model;
 
 import curvaabc.ConexaoDB;
+import static curvaabc.ConexaoDB.iniciarDB;
+import curvaabc.view.AddProdutoView;
+import java.awt.Component;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -176,6 +183,7 @@ public class Produto{
         
         // Pega os dados do banco de dados
         String sql = "SELECT * FROM PRODUTO";
+        ConexaoDB.iniciarDB();
         ResultSet list = ConexaoDB.executarQuery(sql);
 
         // Enquanto ainda houver produtos
@@ -278,6 +286,61 @@ public class Produto{
             produtos.get(i).setPorcentagem_acumulada(p);
             produtos.get(i).setValor_acumulado(v);
         }
+    }
+    
+    public Produto criarProduto(String id, String preco, String quantidade, String criticidade){
+        Double p = Double.parseDouble(preco);
+        Integer q = Integer.parseInt(quantidade);
+        Integer c = Integer.parseInt(criticidade);
+        Produto produto = new Produto(id, p, q, c);
+        return produto;
+    }
+    
+    public String corrigirStringPreco(String p){
+        String preco = p;
+        if (preco.contains(",")) preco = preco.replace(",", ".");
+        return preco;
+    }
+    
+    public static boolean isInteger(String s) {
+        try { 
+            Integer.parseInt(s); 
+        } catch(NumberFormatException e) { 
+            return false; 
+        }
+        return true;
+    }
+
+    public static boolean isDouble(String s) {
+        try { 
+            Double.valueOf(s); 
+        } catch(NumberFormatException e) { 
+            return false; 
+        }
+        return true;
+    }
+       
+    public boolean dadosOk(Component view, String id, String preco, String quantidade, String criticidade){
+        if (!isInteger(id)){ 
+            JOptionPane.showMessageDialog(view, "O campo ID precisa ser um número!");
+            return false;
+        }
+        
+        String p = corrigirStringPreco(preco);
+        if (!isDouble(p)){ 
+            JOptionPane.showMessageDialog(view, "O campo PREÇO precisa ser um número!");
+            return false;
+        }
+        if (!isInteger(quantidade)){ 
+            JOptionPane.showMessageDialog(view, "O campo QUANTIDADE precisa ser um número!");
+            return false;
+        }
+        if (!isInteger(criticidade)){ 
+            JOptionPane.showMessageDialog(view, "O campo CRITICIDADE precisa ser um número!");
+            return false;
+        }
+            
+        return true;
     }
     
 }
