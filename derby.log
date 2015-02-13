@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Thu Feb 12 23:49:09 GMT-03:00 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-014b-80d7-019d-0000034ebd30 
-on database directory C:\Users\doisl_000\Documents\NetBeansProjects\CurvaABC_git\curva_db with class loader sun.misc.Launcher$AppClassLoader@7852e922 
-Loaded from file:/C:/Users/doisl_000/Documents/NetBeansProjects/CurvaABC_git/lib/derby.jar
+Fri Feb 13 11:02:03 BRT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-014b-833f-0f9b-0000032edb68 
+on database directory /home/allan/NetBeansProjects/CurvaABC_git/curva_db with class loader sun.misc.Launcher$AppClassLoader@2eb481ba 
+Loaded from file:/home/allan/NetBeansProjects/CurvaABC_git/lib/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_31-b13
-user.dir=C:\Users\doisl_000\Documents\NetBeansProjects\CurvaABC_git
-os.name=Windows 8
+java.runtime.version=1.7.0_75-b13
+user.dir=/home/allan/NetBeansProjects/CurvaABC_git
+os.name=Linux
 os.arch=amd64
-os.version=6.2
+os.version=3.13.0-45-generic
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

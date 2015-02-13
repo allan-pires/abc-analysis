@@ -25,7 +25,7 @@ public class RelatorioView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         CurvaABC curva = new CurvaABC();
         RelatorioController r = new RelatorioController();
-        label_relatorio.setText(r.print());
+        label_relatorio.setText(r.getRelatorio());
     }
 
     /**

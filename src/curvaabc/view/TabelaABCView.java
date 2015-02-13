@@ -61,7 +61,7 @@ public class TabelaABCView extends javax.swing.JFrame {
        inserirProdutosTabela(p_controller, model);
         
         RelatorioController r = new RelatorioController();
-        System.out.println(r.print());
+        System.out.println(r.getRelatorio());
     }
     
     private void inserirProdutosTabela(ProdutoController p_controller, DefaultTableModel model ) throws SQLException{

@@ -5,8 +5,7 @@
  */
 package curvaabc.model;
 
-import curvaabc.ConexaoDB;
-import static curvaabc.ConexaoDB.iniciarDB;
+import static curvaabc.model.ConexaoDB.iniciarDB;
 import curvaabc.view.AddProdutoView;
 import java.awt.Component;
 import java.sql.Connection;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package curvaabc;
+package curvaabc.model;
 
 import curvaabc.model.Produto;
 import java.awt.Component;
@@ -142,7 +142,8 @@ public class ConexaoDB {
     }
     
     public static void adicionarProdutosTeste() throws SQLException{
-        executarUpdate("DROP DATABASE PRODUTO");
+        executarUpdate("DROP TABLE PRODUTO");
+        criarTabelaProduto();
         executarUpdate("INSERT INTO PRODUTO (ID, PRECO, VENDIDOS, CRITICIDADE) VALUES (1, 0.16, 20000, 1)");
         executarUpdate("INSERT INTO PRODUTO (ID, PRECO, VENDIDOS, CRITICIDADE) VALUES (2, 0.16, 4000, 2)");
         executarUpdate("INSERT INTO PRODUTO (ID, PRECO, VENDIDOS, CRITICIDADE) VALUES (3, 0.20, 1000, 1)");

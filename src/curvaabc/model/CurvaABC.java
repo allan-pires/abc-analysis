@@ -5,7 +5,6 @@
  */
 package curvaabc.model;
 
-import curvaabc.ConexaoDB;
 import curvaabc.controller.ProdutoController;
 import curvaabc.view.InicioView;
 import java.sql.ResultSet;
@@ -117,7 +116,7 @@ public final class CurvaABC {
                 // Enquanto ainda houver produtos
                 while (list.next()) {
 
-                    // Inicia variáveis de acordo o banco de dados
+                    // Inicia variáveis de acordo o banco de// dados
                     double a = Double.valueOf(list.getString(1));
                     double b = Double.valueOf(list.getString(2));
                     double c = Double.valueOf(list.getString(3));
@@ -145,7 +144,7 @@ public final class CurvaABC {
 
     public static void main(String[] args) throws SQLException {
         ConexaoDB.iniciarDB();
-        ConexaoDB.adicionarProdutosTeste();
+        //ConexaoDB.adicionarProdutosTeste();
         InicioView t = new InicioView();
         t.show();
     }

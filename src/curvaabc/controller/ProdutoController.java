@@ -5,7 +5,7 @@
  */
 package curvaabc.controller;
 
-import curvaabc.ConexaoDB;
+import curvaabc.model.ConexaoDB;
 import curvaabc.model.Produto;
 import curvaabc.view.AddProdutoView;
 import java.awt.Component;
